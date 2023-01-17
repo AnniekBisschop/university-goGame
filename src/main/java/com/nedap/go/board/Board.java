@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Board {
 
-    private static final int BOARD_SIZE = 9;
+    public static final int BOARD_SIZE = 19;
     private static final char BLACK = 'B';
     private static final char WHITE = 'W';
-    private static final char EMPTY = '.';
+    public static final char EMPTY = '.';
     private static char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
     private static Scanner scanner = new Scanner(System.in);
 
@@ -44,16 +44,16 @@ public class Board {
     private static void printBoard() {
         // Print the column labels
         System.out.print(" ");
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            System.out.printf("%3d", i + 1);
+        for (int column = 0; column < BOARD_SIZE; column++) {
+            System.out.printf("%3d", column + 1);
         }
         System.out.println();
 
         // Print the board
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            System.out.printf("%-3d", i + 1);
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                System.out.printf("%-3s", board[i][j]);
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            System.out.printf("%-3d", row + 1);
+            for (int column = 0; column < BOARD_SIZE; column++) {
+                System.out.printf("%-3s", board[row][column]);
             }
             System.out.println();
         }
@@ -63,14 +63,19 @@ public class Board {
      * Function name: initializeBoard
      * <p>
      * Inside the function:
-     * 1. Initialize the board with empty spaces represented by a .
+     * 1. Initialize the board with empty spaces represented by a "."
      */
-    private static void initializeBoard() {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                board[i][j] = EMPTY;
+    public static void initializeBoard() {
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int column = 0; column < BOARD_SIZE; column++) {
+                board[row][column] = EMPTY;
             }
         }
+    }
+
+    //added getter for Junit test
+    public static char[][] getBoard() {
+        return board;
     }
 }
 
