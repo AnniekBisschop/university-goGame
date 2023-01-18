@@ -27,20 +27,20 @@ public class GameTest {
     @Test
     public void testIsCaptured() {
         // test capturing a white stone
-        board.setColor(3,4, WHITE);
-        board.setColor(3,3, BLACK);
-        board.setColor(3,5, BLACK);
-        board.setColor(2,4, BLACK);
-        board.setColor(4,4, BLACK);
+        board.setStones(3,4, WHITE);
+        board.setStones(3,3, BLACK);
+        board.setStones(3,5, BLACK);
+        board.setStones(2,4, BLACK);
+        board.setStones(4,4, BLACK);
         assertTrue(game.isCaptured(3, 4));
 
 
         // test capturing a black stone
-        board.setColor(3,4, BLACK);
-        board.setColor(3,3, WHITE);
-        board.setColor(3,5, WHITE);
-        board.setColor(2,4, WHITE);
-        board.setColor(4,4, WHITE);
+        board.setStones(3,4, BLACK);
+        board.setStones(3,3, WHITE);
+        board.setStones(3,5, WHITE);
+        board.setStones(2,4, WHITE);
+        board.setStones(4,4, WHITE);
         game.isCaptured(3, 4);
         assertTrue(game.isCaptured(3, 4));
 

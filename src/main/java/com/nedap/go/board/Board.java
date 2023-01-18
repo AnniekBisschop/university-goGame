@@ -58,7 +58,7 @@ public class Board {
      * Inside the function:
      * 1. Prints the board with labels on x and y axes (1-BOARD_SIZE)
      */
-    private static void printBoard() {
+    public static void printBoard() {
         // Print the column labels
         System.out.print(" ");
         for (int column = 0; column < BOARD_SIZE; column++) {
@@ -121,7 +121,7 @@ public class Board {
     }
 
     /**
-     * Function name: doMove
+     * Function name: placeStone
      *
      * @param row    (int)
      * @param column (int)
@@ -129,7 +129,7 @@ public class Board {
      * Inside the function:
      * 1. Checks if the stone can be placed at an empty spot within the bounds of the board.
      */
-    public void doMove(int row, int column, char color) {
+    public void placeStone(int row, int column, char color) {
         if (isEmptySpot(row, column) && isValidPosition(row, column)) {
             // place a stone of the specified color at the specified location
             boardRepresentation[row][column] = color;
@@ -155,16 +155,18 @@ public class Board {
         return true;
     }
 
+
+
     //added getter for Junit test
     public static char[][] getBoardRepresentation() {
         return boardRepresentation;
     }
 
-    public char getColor(int row, int column) {
+    public char getStones(int row, int column) {
         return boardRepresentation[row][column];
     }
 
-    public void setColor(int row, int column, char color) {
+    public void setStones(int row, int column, char color) {
         boardRepresentation[row][column] = color;
     }
 }
