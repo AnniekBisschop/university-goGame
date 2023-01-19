@@ -10,46 +10,46 @@ public class Board {
     public static final char BLACK = 'B';
     public static final char WHITE = 'W';
     public static final char EMPTY = '.';
-    private static char[][] boardRepresentation = new char[BOARD_SIZE][BOARD_SIZE];
+    private char[][] boardRepresentation = new char[BOARD_SIZE][BOARD_SIZE];
 
     public Board() {
         initializeBoard();
     }
+//
+//    private static Scanner scanner = new Scanner(System.in);
 
-    private static Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
-
-        initializeBoard();
-
-
-        boolean blackTurn = true;
-        boolean gameOver = false;
-        while (!gameOver) {
-            printBoard();
-            System.out.println("Current player: " + Game.getCurrentPlayer());
-            System.out.println("1. Make move\n");
-            System.out.println("2. Pass\n");
-            int choice = scanner.nextInt();
-            if (choice == 1) {
-                printBoard();
-                int x, y;
-                System.out.print("Enter a row (x coordinate) (1-" + BOARD_SIZE + "): ");
-                x = scanner.nextInt() - 1;
-                System.out.print("Enter a column (y coordinate) (1-" + BOARD_SIZE + "): ");
-                y = scanner.nextInt() - 1;
-                if (blackTurn) {
-                    boardRepresentation[x][y] = BLACK;
-                } else {
-                    boardRepresentation[x][y] = WHITE;
-                }
-            } else if (choice == 2) {
-                Game.pass();
-                System.out.println("Current player passed, the current player is now: " + Game.getCurrentPlayer());
-            }
-        }
-        Game.switchPlayer();
-    }
+//    public static void main(String[] args) {
+//
+//        initializeBoard();
+//
+//
+//        boolean blackTurn = true;
+//        boolean gameOver = false;
+//        while (!gameOver) {
+//            printBoard();
+//            System.out.println("Current player: " + Game.getCurrentPlayer());
+//            System.out.println("1. Make move\n");
+//            System.out.println("2. Pass\n");
+//            int choice = scanner.nextInt();
+//            if (choice == 1) {
+//                printBoard();
+//                int x, y;
+//                System.out.print("Enter a row (x coordinate) (1-" + BOARD_SIZE + "): ");
+//                x = scanner.nextInt() - 1;
+//                System.out.print("Enter a column (y coordinate) (1-" + BOARD_SIZE + "): ");
+//                y = scanner.nextInt() - 1;
+//                if (blackTurn) {
+//                    boardRepresentation[x][y] = BLACK;
+//                } else {
+//                    boardRepresentation[x][y] = WHITE;
+//                }
+//            } else if (choice == 2) {
+//                Game.pass();
+//                System.out.println("Current player passed, the current player is now: " + Game.getCurrentPlayer());
+//            }
+//        }
+//        Game.switchPlayer();
+//    }
 
 
     /**
@@ -58,23 +58,23 @@ public class Board {
      * Inside the function:
      * 1. Prints the board with labels on x and y axes (1-BOARD_SIZE)
      */
-    public static void printBoard() {
-        // Print the column labels
-        System.out.print(" ");
-        for (int column = 0; column < BOARD_SIZE; column++) {
-            System.out.printf("%3d", column + 1);
-        }
-        System.out.println();
-
-        // Print the board
-        for (int row = 0; row < BOARD_SIZE; row++) {
-            System.out.printf("%-3d", row + 1);
-            for (int column = 0; column < BOARD_SIZE; column++) {
-                System.out.printf("%-3s", boardRepresentation[row][column]);
-            }
-            System.out.println();
-        }
-    }
+//    public static void printBoard() {
+//        // Print the column labels
+//        System.out.print(" ");
+//        for (int column = 0; column < BOARD_SIZE; column++) {
+//            System.out.printf("%3d", column + 1);
+//        }
+//        System.out.println();
+//
+//        // Print the board
+//        for (int row = 0; row < BOARD_SIZE; row++) {
+//            System.out.printf("%-3d", row + 1);
+//            for (int column = 0; column < BOARD_SIZE; column++) {
+//                System.out.printf("%-3s", boardRepresentation[row][column]);
+//            }
+//            System.out.println();
+//        }
+//    }
 
     /**
      * Function name: initializeBoard
@@ -82,7 +82,7 @@ public class Board {
      * Inside the function:
      * 1. Initialize the board with empty spaces represented by a "."
      */
-    public static void initializeBoard() {
+    public void initializeBoard() {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int column = 0; column < BOARD_SIZE; column++) {
                 boardRepresentation[row][column] = EMPTY;
@@ -100,7 +100,7 @@ public class Board {
      * Inside the function:
      * 1. Returns a boolean. True when the spot is empty. False when spot is taken.
      */
-    public static boolean isEmptySpot(int row, int column) {
+    public  boolean isEmptySpot(int row, int column) {
         // check if the spot at the specified location is empty
         return boardRepresentation[row][column] == EMPTY;
     }
@@ -155,10 +155,30 @@ public class Board {
         return true;
     }
 
+    //TODO: check why copyboard is not working yet.
+    //Should copy be done in board class?
+    public Board copyBoard() {
+        // Create a new Board object to store the copy
+        //maakt board
+        Board copyBoard = new Board();
+        // Iterate over the rows and columns of the original board
+        //In each iteration, it copies the stone at the current position to the corresponding
+        //position on the copy board by calling setStones(row, column, board[row][column]).
+        //TODO: CHeck if this works correctly
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int column = 0; column < BOARD_SIZE; column++) {
+                // Copy the stone at the current position to the copy board
+                char color = getStones(row, column);
+                copyBoard.placeStone(row, column, color);
+            }
+        }
+        return copyBoard;
+    }
+
 
 
     //added getter for Junit test
-    public static char[][] getBoardRepresentation() {
+    public char[][] getBoardRepresentation() {
         return boardRepresentation;
     }
 

@@ -45,8 +45,11 @@ public class GameTest {
         assertTrue(game.isCaptured(3, 4));
 
         // test capturing an empty stone
-        Board.getBoardRepresentation()[3][4] = Board.EMPTY;
+        board.getBoardRepresentation()[3][4] = Board.EMPTY;
         game.isCaptured(3, 4);
         assertEquals(Board.EMPTY, board.getBoardRepresentation()[3][4]);
     }
+
+
+
 }

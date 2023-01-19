@@ -4,6 +4,7 @@ import com.nedap.go.board.Board;
 import com.nedap.go.client.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.nedap.go.board.Board.*;
 
@@ -16,7 +17,7 @@ public class Game {
     public Board board;
 
     // ArrayList to store previous states of the board
-    private ArrayList<Board> boardHistory;
+    private static ArrayList<Board> boardHistory;
 
     private static Player playerBlack;
     private static Player playerWhite;
@@ -36,6 +37,7 @@ public class Game {
         this.playerWhite = playerWhite;
         currentPlayer = playerBlack;
         this.board= board;
+        this.boardHistory = new ArrayList<>();
     }
 
     /**
@@ -52,10 +54,13 @@ public class Game {
     }
 //TODO: Write more logic to check valid move
     //TODO write JAVADOC
-    public void doMove(int row, int col){
-        board.placeStone(row,col,WHITE);
+    public void doMove(int row, int col, char color){
         //update the board with move
-//        boardHistory.add(board);
+//        if (!isKo(row, col, color)) {
+            board.placeStone(row,col,color);
+            Board copyBoard = board.copyBoard();
+            boardHistory.add(copyBoard);
+//        }
 
         switchPlayer();
     }
@@ -67,49 +72,19 @@ public class Game {
 //TODO: compare arraylist deepcopy with arraylist current board boardRepresentation
     //TODO: JAVADOC
 //TODO: Create test for isKo();
-   public boolean isKo(){
-       Board currentBoard = copyBoard();
-       //checks if the boardHistory ArrayList has at least one element
-       if (boardHistory.size() >= 1) {
-           boolean isKo = true;
-           //boardHistory.get(boardHistory.size() - 1) is used to access the last element of the boardHistory ArrayList,
-           //this is the previous board state.
-           Board previousBoard = boardHistory.get(boardHistory.size() - 1);
-           for (int i = 0; i < board.BOARD_SIZE; i++) {
-               for (int j = 0; j < board.BOARD_SIZE; j++) {
-                   if (currentBoard.getStones(i,j) != previousBoard.getStones(i,j)) {
-                       isKo = false;
-                       break;
-                   }
-               }
-           }
-           if (isKo) {
-               System.out.println("Invalid move: Ko rule violated!");
+   public boolean isKo(int row, int col, char color){
+       Board boardAfterMove = board.copyBoard();
+       boardAfterMove.placeStone(row, col, color);
+
+       for (Board historyBoard : boardHistory) {
+           if (historyBoard.equals(boardAfterMove)) {
+               System.out.println("The current board is the same as a previous board in the history.");
                return true;
            }
        }
-       return true;
+       System.out.println("The current board is different from the previous board in the history.");
+       return false;
    }
-
-    //TODO: check why copyboard is not working yet.
-    //Should copy be done in board class?
-    public Board copyBoard() {
-        // Create a new Board object to store the copy
-        Board copyBoard = new Board();
-        // Iterate over the rows and columns of the original board
-        //In each iteration, it copies the stone at the current position to the corresponding
-        //position on the copy board by calling setStones(row, column, board[row][column]).
-        //TODO: CHeck if this works correctly
-
-        for (int row = 0; row < BOARD_SIZE; row++) {
-            for (int column = 0; column < BOARD_SIZE; column++) {
-                // Copy the stone at the current position to the copy board
-                copyBoard.setStones(row, column, board.getStones(row,column));
-            }
-        }
-        return copyBoard;
-    }
-
 
     //Illegal moves: A player cannot place a stone on a point that is already occupied or that would violate any of the other rules.
 
@@ -201,18 +176,25 @@ public class Game {
 
 
 
-    public static void main(String[] args) {
-        Player playerBlack = new Player("playerBlack");
-        Player playerWhite = new Player("playerWhite");
-        Board board = new Board();
-        Game game = new Game(playerBlack,playerWhite,board);
-        game.doMove(4,8);
-        game.doMove(6,8);
-        game.doMove(3,8);
-        board.printBoard();
-        game.doMove(1,3);
-        game.doMove(2,5);
-        board.printBoard();
-    }
+//    public static void main(String[] args) {
+//        Player playerBlack = new Player("playerBlack");
+//        Player playerWhite = new Player("playerWhite");
+//        Board board = new Board();
+//        Game game = new Game(playerBlack,playerWhite,board);
+//        game.doMove(1,1,BLACK);
+//        game.doMove(4,8, WHITE);
+////        board.printBoard();
+//        game.doMove(6,8, BLACK);
+////        board.printBoard();
+//        game.doMove(3,8, WHITE);
+////        board.printBoard();
+//        System.out.println("*********************");
+//        game.doMove(1,3, BLACK);
+////        board.printBoard();
+//        game.doMove(2,5, WHITE);
+////        board.printBoard();
+//        game.doMove(2,5, BLACK);
+//        board.printBoard();
+//    }
 
 }
