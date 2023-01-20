@@ -17,11 +17,11 @@ public class Game {
     public Board board;
 
     // ArrayList to store previous states of the board
-    private static ArrayList<Board> boardHistory;
+    private static ArrayList<String> boardHistory;
 
-    private static Player playerBlack;
-    private static Player playerWhite;
-    private static Player currentPlayer;
+    private  Player playerBlack;
+    private Player playerWhite;
+    private Player currentPlayer;
     private static int amountPasses = 0;
 
     /**
@@ -45,7 +45,7 @@ public class Game {
      * Inside the function:
      * 1. players take turn, alternation of player
      * */
-    public static void switchPlayer() {
+    public void switchPlayer() {
         if (currentPlayer == playerBlack) {
             currentPlayer = playerWhite;
         } else {
@@ -56,12 +56,19 @@ public class Game {
     //TODO write JAVADOC
     public void doMove(int row, int col, char color){
         //update the board with move
-//        if (!isKo(row, col, color)) {
+        if (!isKo(row, col, color)) {
             board.placeStone(row,col,color);
             Board copyBoard = board.copyBoard();
-            boardHistory.add(copyBoard);
-//        }
-
+            boardHistory.add(board.toString());
+        }
+        if(isCaptured(row,col)){
+            //Change name??? -> Empty fields
+            capture(row,col);
+        }
+        //TODO if captured
+        //TODO removeStones
+        ///TODO Resetpass to much? PLacestone has resetPass
+        resetPass();
         switchPlayer();
     }
 
@@ -69,40 +76,47 @@ public class Game {
     // Check if the move would violate the rule of ko
 
 
-//TODO: compare arraylist deepcopy with arraylist current board boardRepresentation
+
     //TODO: JAVADOC
-//TODO: Create test for isKo();
+
    public boolean isKo(int row, int col, char color){
        Board boardAfterMove = board.copyBoard();
        boardAfterMove.placeStone(row, col, color);
 
-       for (Board historyBoard : boardHistory) {
-           if (historyBoard.equals(boardAfterMove)) {
-               System.out.println("The current board is the same as a previous board in the history.");
-               return true;
-           }
-       }
-       System.out.println("The current board is different from the previous board in the history.");
-       return false;
+       return boardHistory.contains(boardAfterMove.toString());
    }
+//       boolean temporaryKo = false;
+
+//       for (Board historyBoard : boardHistory) {
+//           for (int i = 0; i < BOARD_SIZE; i++) {
+//               for (int j = 0; j < BOARD_SIZE; j++) {
+//                   if (historyBoard.getStones(i, j) != boardAfterMove.getStones(i, j)) {
+//                       temporaryKo = false;
+//                       continue; // Should go to the next board in history (back to the for each)
+//                   } else if (historyBoard.getStones(i, j) == boardAfterMove.getStones(i, j)) {
+//                       temporaryKo = true;
+//                   }
+//               }
+//           if (historyBoard.equals(boardAfterMove)) {
+//               System.out.println("The current board is the same as a previous board in the history.");
+//               return true;
+//           }
+//       }
+//       System.out.println("The current board is different from the previous board in the history.");
+//       return false;
+
 
     //Illegal moves: A player cannot place a stone on a point that is already occupied or that would violate any of the other rules.
 
-    //Pass: A player can choose to pass their turn if they do not want to make a move.
+
     /**
      * Function name: pass
      * Inside the function:
      * 1. Checks if the players played 2 consecutive passes. This will end the game.
      */
-    public static void pass() {
-        if (amountPasses == 2) {
-            System.out.println("Both players have passed, the game is over.");
-            gameOver();
-        } else {
-            // switch the current player
-           switchPlayer();
-            amountPasses++;
-        }
+    public void pass() {
+        amountPasses++;
+        switchPlayer();
     }
 
     /**
@@ -155,46 +169,21 @@ public class Game {
 
     //Scoring: The number of captured stones and territory must be accurately calculated at the end of the game.
 
-    //checkBoard is full()
-
     //End of Game: The game ends when both players pass consecutively.
-    public static boolean isGameOver() {
-        return true;
+    public boolean isGameOver() {
+        if (amountPasses == 2) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
-    public static void gameOver(){
-        //TODO: write method
-    }
 
-    public static Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
-
+//TODO: check need this??
     public Player getTurn() {
         return currentPlayer;
     }
-
-
-
-//    public static void main(String[] args) {
-//        Player playerBlack = new Player("playerBlack");
-//        Player playerWhite = new Player("playerWhite");
-//        Board board = new Board();
-//        Game game = new Game(playerBlack,playerWhite,board);
-//        game.doMove(1,1,BLACK);
-//        game.doMove(4,8, WHITE);
-////        board.printBoard();
-//        game.doMove(6,8, BLACK);
-////        board.printBoard();
-//        game.doMove(3,8, WHITE);
-////        board.printBoard();
-//        System.out.println("*********************");
-//        game.doMove(1,3, BLACK);
-////        board.printBoard();
-//        game.doMove(2,5, WHITE);
-////        board.printBoard();
-//        game.doMove(2,5, BLACK);
-//        board.printBoard();
-//    }
-
 }

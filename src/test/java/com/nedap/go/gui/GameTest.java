@@ -6,6 +6,8 @@ import com.nedap.go.client.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static com.nedap.go.board.Board.BLACK;
 import static com.nedap.go.board.Board.WHITE;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,13 +16,26 @@ public class GameTest {
 
     private Board board;
     private Game game;
-    private static Player playerBlack;
-    private static Player playerWhite;
+    private Player playerBlack;
+    private  Player playerWhite;
+
+
 
     @BeforeEach
     public void setUp() {
         board = new Board();
         game = new Game(playerBlack,playerWhite,board);
+    }
+
+    @Test
+    public void testIsKo() {
+
+        // Place a stone on the board
+        game.doMove(0, 0, BLACK);
+
+        // Test that the board history contains the current board state
+        assertTrue(game.isKo(0, 0, BLACK));
+
     }
 
 
