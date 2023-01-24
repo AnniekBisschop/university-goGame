@@ -54,7 +54,7 @@ public class Server implements Runnable {
 
 
     public static void main(String[] args) {
-        Server server = new Server(879);
+        Server server = new Server(899);
         Thread thread = new Thread(server);
         thread.start();
 

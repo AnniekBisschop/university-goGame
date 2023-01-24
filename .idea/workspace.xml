@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Protocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Protocol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/Protocol.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/Protocol.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" afterDir="false" />
@@ -191,9 +189,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

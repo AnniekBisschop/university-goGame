@@ -97,7 +97,7 @@ public class Client implements Runnable {
     }
 
     public static void main(String[] args) {
-        Client client = new Client("localhost", 879);
+        Client client = new Client("localhost", 899);
         Thread thread = new Thread(client);
         thread.start();
     }
