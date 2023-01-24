@@ -11,38 +11,34 @@ import static com.nedap.go.Protocol.*;
 public class Client implements Runnable {
     private Socket socket;
     private BufferedReader in;
+    private BufferedReader inputFromServer;
     private PrintWriter out;
     private boolean running;
 
     public Client(String serverIp, int port) {
         try {
-            socket = new Socket(serverIp, port);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+           socket = new Socket(serverIp, port);
+            in = new BufferedReader(new InputStreamReader(System.in));
             out = new PrintWriter(socket.getOutputStream(), true);
+            inputFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             running = true;
         } catch (UnknownHostException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+           } catch (IOException e) {
+          e.printStackTrace();
+       }
     }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your command:");
         while (running) {
             try {
-                System.out.println("TEST");
-                //TODO: Check this input!! DOES NOT WORK!!
                 String message = in.readLine();
-                System.out.println("TEST");
-                System.out.println("Message form client: " + message);
                 if(message == null) continue;
                 String[] parts = message.split(SEPARATOR);
                 String command = parts[0];
                 switch (command) {
                     case HELLO:
-                        System.out.println("TEST in SWitch HELLO");
                         sendMessage(HELLO);
                         break;
                     case USERNAME:
@@ -60,6 +56,7 @@ public class Client implements Runnable {
                     default:
                         break;
                 }
+                receiveMessageFromServer();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -67,9 +64,18 @@ public class Client implements Runnable {
     }
 
     public void sendMessage(String message) {
-        System.out.println("**sendmessage**");
         out.println(message);
-        System.out.println("after sendmessage");
+    }
+//Do{
+// … receiveMessage
+//while(noMessage)
+
+    public void receiveMessageFromServer(){
+        try {
+            System.out.println(inputFromServer.readLine());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void username(String name) {
@@ -91,7 +97,7 @@ public class Client implements Runnable {
     }
 
     public static void main(String[] args) {
-        Client client = new Client("localhost", 878);
+        Client client = new Client("localhost", 879);
         Thread thread = new Thread(client);
         thread.start();
     }

@@ -39,12 +39,11 @@ public class ClientHandler implements Runnable{
 
             // Wait for the client's HELLO message
             String hello = in.readLine();
-            System.out.println(hello);
+            System.out.println("CLienthandler: " + hello);
             if (!hello.equals(HELLO)) {
                 out.println(ERROR);
                 return;
             }
-            out.println("I received your message");
             // Send the WELCOME message to the client
             out.println(WELCOME);
 
@@ -62,7 +61,7 @@ public class ClientHandler implements Runnable{
             }
 
             // Send the JOINED message to the client
-            out.println(USERNAME + SEPARATOR + "JOINED");
+            out.println(username.toString() + SEPARATOR + JOINED);
 
             // The initialization sequence has completed, now the client can play games
 

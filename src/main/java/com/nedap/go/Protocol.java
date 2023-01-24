@@ -6,6 +6,7 @@ public class Protocol {
     public static final String HELLO = "HELLO";
     public static final String WELCOME = "WELCOME";
     public static final String USERNAME = "USERNAME";
+    public static final String JOINED = "JOINED";
     public static final String USERNAMETAKEN = "USERNAMETAKEN";
     public static final String QUEUE = "QUEUE";
     public static final String NEWGAME = "NEWGAME";
