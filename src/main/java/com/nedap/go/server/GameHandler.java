@@ -55,20 +55,20 @@ public void startNewGame() throws IOException {
     if(queuedPlayers.size() >= 2) {
         Player playerBlack = queuedPlayers.remove(0);
         Player playerWhite = queuedPlayers.remove(0);
-        Game game = new Game(playerBlack, playerWhite, board);
-        games.add(game);
-        broadcastNewGame(playerBlack, playerWhite);
+////        Game game = new Game(playerBlack, playerWhite, server);
+//        games.add(game);
+//        broadcastNewGame(playerBlack, playerWhite);
     }
 }
 
  //TODO: HOW TO broadcastNewGame to every client in one game?
 
-    private void broadcastNewGame(Player playerBlack, Player playerWhite) throws IOException {
-
-        for (ClientHandler clientHandler : clientHandlers) {
-            clientHandler.sendNewGameCommand(playerBlack, playerWhite);
-        }
-    }
+//    private void broadcastNewGame(Player playerBlack, Player playerWhite) throws IOException {
+//
+//        for (ClientHandler clientHandler : clientHandlers) {
+//            clientHandler.sendNewGameCommand(playerBlack, playerWhite);
+//        }
+//    }
 
     public List<Player> getQueuedPlayers() {
         return queuedPlayers;

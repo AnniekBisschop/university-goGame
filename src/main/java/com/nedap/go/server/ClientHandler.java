@@ -29,10 +29,11 @@ public class ClientHandler implements Runnable {
     private GameHandler gameHandler;
     private BufferedReader in;
     private PrintWriter out;
+    private Server server;
     private static HashSet<String> existingUsers = new HashSet<>();
     private Player player;
 
-    public ClientHandler(Socket clientSocket, GameHandler gameHandler) {
+    public ClientHandler(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
         this.gameHandler = gameHandler;
     }
