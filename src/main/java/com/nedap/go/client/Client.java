@@ -44,6 +44,9 @@ public class Client implements Runnable {
                     case USERNAME:
                         username(parts[1]);
                         break;
+                    case QUEUE:
+                        sendMessage(QUEUE);
+                        break;
                     case MOVE:
                         move(parts[1], parts[2]);
                         break;
@@ -97,7 +100,7 @@ public class Client implements Runnable {
     }
 
     public static void main(String[] args) {
-        Client client = new Client("localhost", 899);
+        Client client = new Client("localhost", 900);
         Thread thread = new Thread(client);
         thread.start();
     }

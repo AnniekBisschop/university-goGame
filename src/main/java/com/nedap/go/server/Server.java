@@ -15,11 +15,15 @@ public class Server implements Runnable {
     private int port;
     private ServerSocket serverSocket;
     private List<ClientHandler> clientHandlers;
+    private GameHandler gameHandler;
 
     public Server(int port) {
         this.port = port;
         clientHandlers = new ArrayList<>();
+        gameHandler = new GameHandler();
     }
+
+    //queue.
 
     @Override
     public void run() {
@@ -32,7 +36,7 @@ public class Server implements Runnable {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("New client connected: " + clientSocket);
 
-                ClientHandler clientHandler = new ClientHandler(clientSocket);
+                ClientHandler clientHandler = new ClientHandler(clientSocket, gameHandler);
                 clientHandlers.add(clientHandler);
 
                 Thread thread = new Thread(clientHandler);
@@ -54,7 +58,7 @@ public class Server implements Runnable {
 
 
     public static void main(String[] args) {
-        Server server = new Server(899);
+        Server server = new Server(900);
         Thread thread = new Thread(server);
         thread.start();
 

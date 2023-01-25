@@ -16,7 +16,7 @@ public class Player {
      * Returns the name of the player.
      * @return the username of the player
      */
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 

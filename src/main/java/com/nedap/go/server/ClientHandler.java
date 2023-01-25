@@ -1,6 +1,8 @@
 package com.nedap.go.server;
 
 
+import com.nedap.go.client.Player;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,19 +25,22 @@ import static com.nedap.go.Protocol.*;
  * handling all the communication, validation, and logic for a single client.
  */
 public class ClientHandler implements Runnable {
-    private Socket socket;
+    private Socket clientSocket;
+    private GameHandler gameHandler;
     private BufferedReader in;
     private PrintWriter out;
     private static HashSet<String> existingUsers = new HashSet<>();
+    private Player player;
 
-    public ClientHandler(Socket socket) {
-        this.socket = socket;
+    public ClientHandler(Socket clientSocket, GameHandler gameHandler) {
+        this.clientSocket = clientSocket;
+        this.gameHandler = gameHandler;
     }
 
     public void run() {
         try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
 
             // Wait for the client's HELLO message
             String hello = in.readLine();
@@ -50,7 +55,13 @@ public class ClientHandler implements Runnable {
 
             // Send the JOINED message to the client
             out.println(JOINED+ SEPARATOR + username);
-
+            String queue = in.readLine();
+            if(!queue.equals(QUEUE)){
+                out.println(ERROR);
+                return;
+            }else{
+                handleQueueCommand();
+            }
 
             //TODO: WHAT TO DO WHEN USER LEAVES/QUIT?
 //            if (message.equals(QUIT)) {
@@ -68,7 +79,7 @@ public class ClientHandler implements Runnable {
             try {
                 in.close();
                 out.close();
-                socket.close();
+                clientSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -83,7 +94,7 @@ public class ClientHandler implements Runnable {
         }
         existingUsers.add(username[1]);
         for (String user : existingUsers) {
-            System.out.println(user);
+            System.out.println(JOINED + SEPARATOR + user);
         }
         return username[1];
 
@@ -101,15 +112,42 @@ public class ClientHandler implements Runnable {
         // Return true if the move is valid, false otherwise
         return true;
     }
+    public void handleQueueCommand() {
+        // handle the queue command from client
+        player = this.player; // get player object from client
+        gameHandler.queuePlayer(player);
+        System.out.println("reached handleQueueCommand");
+        out.println("JOINED THE QUEUE" + "NOW IN QUEUE" + gameHandler.getQueuedPlayers());
+
+        //server --> add client to queue
+    }
+
+
+    public void handleNewGameCommand(Player playerBlack, Player playerWhite) {
+        // handle the new game command from server
+    }
+
+    public void sendNewGameCommand(Player playerBlack, Player playerWhite) throws IOException {
+        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+        out.println(NEWGAME +playerBlack.getUsername()+" "+playerWhite.getUsername());
+        out.flush();
+    }
+
 
     public void close() {
         try {
             in.close();
             out.close();
-            socket.close();
+            clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public String toString() {
+        return "ClientHandler{" +
+                "gameHandler=" + gameHandler +
+                '}';
+    }
 }
