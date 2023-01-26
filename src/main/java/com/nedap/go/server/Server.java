@@ -41,15 +41,14 @@ public class Server implements Runnable {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 out.println("New client connected: " + clientSocket);
-                out.println("HERE?!");
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
                 Thread thread = new Thread(clientHandler);
                 thread.start();
 
                 clientHandlers.add(clientHandler);
                 waitingPlayers.offer(clientHandler); // add to waiting players queue
-
-                handleQueueCommand();
+//
+//                handleQueueCommand();
                 startNewGameIfPossible();
 
 

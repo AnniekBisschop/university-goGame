@@ -42,7 +42,7 @@ public class Client implements Runnable {
                         sendMessage(HELLO);
                         break;
                     case USERNAME:
-                        username(parts[1]);
+                        sendUsernameToServer(parts[1]);
                         break;
                     case QUEUE:
                         sendMessage(QUEUE);
@@ -79,8 +79,7 @@ public class Client implements Runnable {
         }
     }
 
-
-    public void username(String name) {
+    public void sendUsernameToServer(String name) {
         sendMessage(USERNAME + SEPARATOR + name);
     }
 

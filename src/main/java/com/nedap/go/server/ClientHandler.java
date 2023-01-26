@@ -46,21 +46,23 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("init");
+
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received message from client: " + inputLine);  // add this line
                 if (inputLine.equals(HELLO)) {
-                    System.out.println("Test2");
                     out.println(WELCOME);
                 }
                 username = server.handleUsername(in, out);
-                System.out.println("Got username?:" + username);
+                System.out.println("Got username from client:" + username);
+                System.out.println("Inputline after handleusername " + inputLine);
                 // Send the JOINED message to the client
                 out.println(JOINED + SEPARATOR + username);
+                inputLine = in.readLine();
+                System.out.println("Inputline before if statement queue " +inputLine);
                 if (inputLine.equals(QUEUE)) {
-                    System.out.println("reached queue");
-                    server.handleQueueCommand();
+                    out.println("reached queue");
+//                    server.handleQueueCommand();
                 }
             }
         } catch (IOException e) {
@@ -86,3 +88,35 @@ public class ClientHandler implements Runnable {
     }
 }
 
+/*
+*  String inputLine;
+            boolean isHelloReceived = false;
+            boolean isUsernameReceived = false;
+            while ((inputLine = in.readLine()) != null) {
+                System.out.println("Received message from client: " + inputLine);
+                if (!isHelloReceived) {
+                    if (inputLine.equals(HELLO)) {
+                        out.println(WELCOME);
+                        isHelloReceived = true;
+                    } else {
+                        // Handle invalid input
+                    }
+                } else if (!isUsernameReceived) {
+                    username = server.handleUsername(in,out);
+                    if (username != null) {
+                        System.out.println("Got username?:" + username);
+                        out.println(JOINED + SEPARATOR + username);
+                        isUsernameReceived = true;
+                    } else {
+                        // Handle invalid username
+                    }
+                } else if (inputLine.equals(QUEUE)) {
+                    System.out.println("Reached queue command");
+                    server.handleQueueCommand();
+                    //takes in username?
+                } else {
+                    // Handle other input or invalid commands
+                }
+            }
+        }
+* */
