@@ -5,18 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/a/4ad32d4aa4a93491e943a5aa30810f2a69769109" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/3/b31520402a93ed8b0df21d09d3e0b9b8bfb8ac28" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/tui/Tui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/tui/Tui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/GameHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/GameHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$nalAssignment.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/tui/Tui.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.Client" />
       <module name="gogame" />
@@ -84,6 +86,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.nedap.go.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.nedap.go.tui.Tui" />
+      <module name="gogame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nedap.go.tui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -123,36 +138,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testIsKo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gogame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.nedap.go.gui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
-      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
-      <option name="METHOD_NAME" value="testIsKo" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Application.Tui" />
       <item itemvalue="Application.Server" />
       <item itemvalue="Application.Client" />
       <item itemvalue="JUnit.BoardTest.testCopyBoard" />
       <item itemvalue="JUnit.GameTest.testIsCaptured" />
-      <item itemvalue="JUnit.GameTest.testIsKo" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Tui" />
+        <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.GameTest.testIsCaptured" />
         <item itemvalue="JUnit.BoardTest.testCopyBoard" />
-        <item itemvalue="JUnit.GameTest.testIsKo" />
       </list>
     </recent_temporary>
   </component>

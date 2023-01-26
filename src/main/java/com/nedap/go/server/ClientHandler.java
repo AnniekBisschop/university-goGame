@@ -1,6 +1,7 @@
 package com.nedap.go.server;
 
 
+import com.nedap.go.Protocol;
 import com.nedap.go.client.Player;
 
 import java.io.BufferedReader;
@@ -25,130 +26,63 @@ import static com.nedap.go.Protocol.*;
  * handling all the communication, validation, and logic for a single client.
  */
 public class ClientHandler implements Runnable {
-    private Socket clientSocket;
-    private GameHandler gameHandler;
+    private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
     private Server server;
-    private static HashSet<String> existingUsers = new HashSet<>();
-    private Player player;
+    private String username;
 
-    public ClientHandler(Socket clientSocket, Server server) {
-        this.clientSocket = clientSocket;
-        this.gameHandler = gameHandler;
-    }
-
-    public void run() {
+    public ClientHandler(Socket socket, Server server) {
+        this.socket = socket;
+        this.server = server;
         try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-
-            // Wait for the client's HELLO message
-            String hello = in.readLine();
-            if (!hello.equals(HELLO)) {
-                out.println(ERROR);
-                return;
-            }
-
-            // Send the WELCOME message to the client
-            out.println(WELCOME);
-            String username = handleUsername(in, out);
-
-            // Send the JOINED message to the client
-            out.println(JOINED+ SEPARATOR + username);
-            String queue = in.readLine();
-            if(!queue.equals(QUEUE)){
-                out.println(ERROR);
-                return;
-            }else{
-                handleQueueCommand();
-            }
-
-            //TODO: WHAT TO DO WHEN USER LEAVES/QUIT?
-//            if (message.equals(QUIT)) {
-//                existingUsers.remove(username);
-//                out.println(username[1] + SEPARATOR + "left");
-//                close();
-//                return;
-//            }
-
-            // The initialization sequence has completed, now the client can play games
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                in.close();
-                out.close();
-                clientSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private String handleUsername(BufferedReader in, PrintWriter out) throws IOException {
-        String[] username = in.readLine().split(SEPARATOR);
-        while (isUsernameTaken(username[1])) {
-            out.println(USERNAMETAKEN + SEPARATOR + "Please enter another USERNAME");
-            username = in.readLine().split(SEPARATOR);
-        }
-        existingUsers.add(username[1]);
-        for (String user : existingUsers) {
-            System.out.println(JOINED + SEPARATOR + user);
-        }
-        return username[1];
-
-    }
-
-    // Check if the username is taken by checking a Hashset of existing users
-    // Return true if the username is taken, false otherwise
-    private boolean isUsernameTaken(String username) {
-        return existingUsers.contains(username);
-    }
-
-
-    private boolean validateMove(String move) {
-        // Validate the move by checking the game rules and current state
-        // Return true if the move is valid, false otherwise
-        return true;
-    }
-    public void handleQueueCommand() {
-        // handle the queue command from client
-        player = this.player; // get player object from client
-        gameHandler.queuePlayer(player);
-        System.out.println("reached handleQueueCommand");
-        out.println("JOINED THE QUEUE" + "NOW IN QUEUE" + gameHandler.getQueuedPlayers());
-
-        //server --> add client to queue
-    }
-
-
-    public void handleNewGameCommand(Player playerBlack, Player playerWhite) {
-        // handle the new game command from server
-    }
-
-    public void sendNewGameCommand(Player playerBlack, Player playerWhite) throws IOException {
-        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-        out.println(NEWGAME +playerBlack.getUsername()+" "+playerWhite.getUsername());
-        out.flush();
-    }
-
-
-    public void close() {
-        try {
-            in.close();
-            out.close();
-            clientSocket.close();
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public String toString() {
-        return "ClientHandler{" +
-                "gameHandler=" + gameHandler +
-                '}';
+    public void run() {
+        try {
+            System.out.println("init");
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                System.out.println("Received message from client: " + inputLine);  // add this line
+                if (inputLine.equals(HELLO)) {
+                    System.out.println("Test2");
+                    out.println(WELCOME);
+                }
+                username = server.handleUsername(in, out);
+                System.out.println("Got username?:" + username);
+                // Send the JOINED message to the client
+                out.println(JOINED + SEPARATOR + username);
+                if (inputLine.equals(QUEUE)) {
+                    System.out.println("reached queue");
+                    server.handleQueueCommand();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void close() throws IOException {
+        in.close();
+        out.close();
+        socket.close();
+        server.existingUsers.remove(username);
     }
 }
+

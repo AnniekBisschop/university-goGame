@@ -12,14 +12,14 @@ public class Client implements Runnable {
     private Socket socket;
     private BufferedReader in;
     private BufferedReader inputFromServer;
-    private PrintWriter out;
+    private PrintWriter outputFromClient;
     private boolean running;
 
     public Client(String serverIp, int port) {
         try {
            socket = new Socket(serverIp, port);
             in = new BufferedReader(new InputStreamReader(System.in));
-            out = new PrintWriter(socket.getOutputStream(), true);
+            outputFromClient = new PrintWriter(socket.getOutputStream(), true);
             inputFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             running = true;
         } catch (UnknownHostException e) {
@@ -67,19 +67,18 @@ public class Client implements Runnable {
     }
 
     public void sendMessage(String message) {
-        out.println(message);
+        outputFromClient.println(message);
     }
-//Do{
-// … receiveMessage
-//while(noMessage)
 
     public void receiveMessageFromServer(){
+        System.out.println("waiting for message from server");
         try {
-            System.out.println(inputFromServer.readLine());
+            System.out.println(inputFromServer.readLine() + " received message from server");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     public void username(String name) {
         sendMessage(USERNAME + SEPARATOR + name);

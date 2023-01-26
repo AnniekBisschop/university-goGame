@@ -1,17 +1,14 @@
 package com.nedap.go.server;
 
-import com.nedap.go.client.Player;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.SQLOutput;
 import java.util.*;
 
 import static com.nedap.go.Protocol.*;
+import static java.lang.System.out;
 
 public class Server implements Runnable {
     private int port;
@@ -22,7 +19,7 @@ public class Server implements Runnable {
     // queue to keep track of waiting players (collection framework)
     private Queue<ClientHandler> waitingPlayers;
     // Keep track of all connected clients, joined and not joined the queue
-    private static HashSet<String> existingUsers = new HashSet<>();
+    static HashSet<String> existingUsers = new HashSet<>();
     // variable to keep track of number of games started
     private int numGamesStarted;
 
@@ -38,21 +35,24 @@ public class Server implements Runnable {
     public void run() {
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("Server started on port " + port);
-            System.out.println("Waiting for a new connection");
+            out.println("Server started on port " + port);
+            out.println("Waiting for a new connection");
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("New client connected: " + clientSocket);
-
+                out.println("New client connected: " + clientSocket);
+                out.println("HERE?!");
                 ClientHandler clientHandler = new ClientHandler(clientSocket, this);
+                Thread thread = new Thread(clientHandler);
+                thread.start();
+
                 clientHandlers.add(clientHandler);
                 waitingPlayers.offer(clientHandler); // add to waiting players queue
 
+                handleQueueCommand();
                 startNewGameIfPossible();
 
-                Thread thread = new Thread(clientHandler);
-                thread.start();
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class Server implements Runnable {
                     clientHandler.close();
                 }
                 for (GameHandler gameHandler : activeGameHandlers) {
-                    gameHandler.close();
+//                    gameHandler.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -76,7 +76,7 @@ public class Server implements Runnable {
             ClientHandler player1 = waitingPlayers.poll();
             ClientHandler player2 = waitingPlayers.poll();
             GameHandler newGameHandler = new GameHandler();
-//            newGameHandler.startNewGame(player1, player2, this);
+//         newGameHandler.startNewGame(player1, player2, this);
             activeGameHandlers.add(newGameHandler);
             numGamesStarted++;
         }
@@ -86,17 +86,24 @@ public class Server implements Runnable {
     }
 
     String handleUsername(BufferedReader in, PrintWriter out) throws IOException {
-        String[] username = in.readLine().split(SEPARATOR);
-        while (isUsernameTaken(username[1])) {
+        String username = in.readLine();
+        System.out.println("HandleUsername after readline:" + username);
+        String[] splitUsername = username.split(SEPARATOR);
+        while (isUsernameTaken(splitUsername[1])) {
             out.println(USERNAMETAKEN + SEPARATOR + "Please enter another USERNAME");
-            username = in.readLine().split(SEPARATOR);
+            splitUsername = in.readLine().split(SEPARATOR);
         }
-        existingUsers.add(username[1]);
+        existingUsers.add(splitUsername[1]);
         for (String user : existingUsers) {
             System.out.println(JOINED + SEPARATOR + user);
         }
-        return username[1];
+        return splitUsername[1];
 
+    }
+
+        public void handleQueueCommand() {
+        // handle the queue command from client
+           System.out.println("JOINED THE QUEUE");
     }
 
     // Check if the username is taken by checking a Hashset of existing users
@@ -104,7 +111,6 @@ public class Server implements Runnable {
     private boolean isUsernameTaken(String username) {
         return existingUsers.contains(username);
     }
-
 
 
     public static void main(String[] args) {
