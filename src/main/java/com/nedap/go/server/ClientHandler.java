@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.HashSet;
 
 import static com.nedap.go.Protocol.*;
+import static com.nedap.go.server.Server.existingUsers;
 
 /**
  * A client handler is a class or component that handles the communication between a server and a single client.
@@ -31,6 +32,7 @@ public class ClientHandler implements Runnable {
     private PrintWriter out;
     private Server server;
     private String username;
+    private boolean queueCommandReceived = false;
 
     public ClientHandler(Socket socket, Server server) {
         this.socket = socket;
@@ -46,23 +48,30 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
-
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("Received message from client: " + inputLine);  // add this line
-                if (inputLine.equals(HELLO)) {
-                    out.println(WELCOME);
-                }
-                username = server.handleUsername(in, out);
-                System.out.println("Got username from client:" + username);
-                System.out.println("Inputline after handleusername " + inputLine);
-                // Send the JOINED message to the client
-                out.println(JOINED + SEPARATOR + username);
-                inputLine = in.readLine();
-                System.out.println("Inputline before if statement queue " +inputLine);
-                if (inputLine.equals(QUEUE)) {
-                    out.println("reached queue");
-//                    server.handleQueueCommand();
+                System.out.println("Received message from client: " + inputLine);
+                String[] parts = inputLine.split(SEPARATOR);
+                String command = parts[0];
+                switch (command) {
+                    case HELLO:
+                        out.println(WELCOME);
+                        break;
+                    case USERNAME:
+                       username = handleUserName(inputLine);
+                        break;
+                    case QUEUE:
+                        if (queueCommandReceived) {
+                            server.removeFromQueue(this);
+                        } else {
+                            server.addToQueue(this);
+                            queueCommandReceived = true;
+                            out.println();
+                        }
+                        break;
+                    default:
+                        out.println(ERROR);
+                        break;
                 }
             }
         } catch (IOException e) {
@@ -76,6 +85,29 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    private String handleUserName(String inputLine) throws IOException {
+        String username = inputLine;
+        String[] splitUsername = username.split(SEPARATOR);
+        while (isUsernameTaken(splitUsername[1])) {
+            out.println(USERNAMETAKEN + SEPARATOR + "Please enter another USERNAME");
+            splitUsername = in.readLine().split(SEPARATOR);
+            System.out.println("Received message from client: " + inputLine);
+        }
+        existingUsers.add(splitUsername[1]);
+        out.println(JOINED + SEPARATOR + splitUsername[1]);
+       for (String user : existingUsers) {
+            System.out.println("User on server: " + user);
+        };
+       return splitUsername[1];
+    }
+
+
+    // Check if the username is taken by checking a Hashset of existing users
+    // Return true if the username is taken, false otherwise
+    boolean isUsernameTaken(String username) {
+        return existingUsers.contains(username);
+    }
+
     public String getUsername() {
         return username;
     }
@@ -84,39 +116,7 @@ public class ClientHandler implements Runnable {
         in.close();
         out.close();
         socket.close();
-        server.existingUsers.remove(username);
+        existingUsers.remove(username);
     }
 }
 
-/*
-*  String inputLine;
-            boolean isHelloReceived = false;
-            boolean isUsernameReceived = false;
-            while ((inputLine = in.readLine()) != null) {
-                System.out.println("Received message from client: " + inputLine);
-                if (!isHelloReceived) {
-                    if (inputLine.equals(HELLO)) {
-                        out.println(WELCOME);
-                        isHelloReceived = true;
-                    } else {
-                        // Handle invalid input
-                    }
-                } else if (!isUsernameReceived) {
-                    username = server.handleUsername(in,out);
-                    if (username != null) {
-                        System.out.println("Got username?:" + username);
-                        out.println(JOINED + SEPARATOR + username);
-                        isUsernameReceived = true;
-                    } else {
-                        // Handle invalid username
-                    }
-                } else if (inputLine.equals(QUEUE)) {
-                    System.out.println("Reached queue command");
-                    server.handleQueueCommand();
-                    //takes in username?
-                } else {
-                    // Handle other input or invalid commands
-                }
-            }
-        }
-* */

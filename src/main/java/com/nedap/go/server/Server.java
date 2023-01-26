@@ -46,12 +46,6 @@ public class Server implements Runnable {
                 thread.start();
 
                 clientHandlers.add(clientHandler);
-                waitingPlayers.offer(clientHandler); // add to waiting players queue
-//
-//                handleQueueCommand();
-                startNewGameIfPossible();
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,13 +64,30 @@ public class Server implements Runnable {
         }
     }
 
+
+    public void addToQueue(ClientHandler clientHandler) {
+        waitingPlayers.offer(clientHandler); // add to waiting players queue
+        System.out.println(clientHandler.getUsername() + " JOINED THE QUEUE");
+        startNewGameIfPossible();
+    }
+
+    public void removeFromQueue(ClientHandler clientHandler) {
+        if (waitingPlayers.contains(clientHandler)) {
+            waitingPlayers.remove(clientHandler);
+            out.println(clientHandler.getUsername() +"REMOVED FROM QUEUE");
+        } else {
+            out.println(clientHandler + " not found in the queue");
+        }
+    }
+
     private void startNewGameIfPossible() {
         if (waitingPlayers.size() >= 2) {
             ClientHandler player1 = waitingPlayers.poll();
             ClientHandler player2 = waitingPlayers.poll();
-            GameHandler newGameHandler = new GameHandler();
-//         newGameHandler.startNewGame(player1, player2, this);
-            activeGameHandlers.add(newGameHandler);
+            System.out.println("GAME STARTED");
+//            GameHandler newGameHandler = new GameHandler();
+//         //newGameHandler.startNewGame(player1, player2, this);
+//            activeGameHandlers.add(newGameHandler);
             numGamesStarted++;
         }
     }
@@ -84,32 +95,23 @@ public class Server implements Runnable {
         return numGamesStarted;
     }
 
-    String handleUsername(BufferedReader in, PrintWriter out) throws IOException {
-        String username = in.readLine();
-        System.out.println("HandleUsername after readline:" + username);
-        String[] splitUsername = username.split(SEPARATOR);
-        while (isUsernameTaken(splitUsername[1])) {
-            out.println(USERNAMETAKEN + SEPARATOR + "Please enter another USERNAME");
-            splitUsername = in.readLine().split(SEPARATOR);
-        }
-        existingUsers.add(splitUsername[1]);
-        for (String user : existingUsers) {
-            System.out.println(JOINED + SEPARATOR + user);
-        }
-        return splitUsername[1];
+//   public String handleUsername(BufferedReader in, PrintWriter out) throws IOException {
+//       String username = in.readLine();
+//       System.out.println("HandleUsername after readline:" + username);
+//       String[] splitUsername = username.split(SEPARATOR);
+//       while (isUsernameTaken(splitUsername[1])) {
+//           out.println(USERNAMETAKEN + SEPARATOR + "Please enter another USERNAME");
+//           splitUsername = in.readLine().split(SEPARATOR);
+//       }
+//        existingUsers.add(splitUsername[1]);
+//        for (String user : existingUsers) {
+//            System.out.println(JOINED + SEPARATOR + user);
+//        }
+//        return splitUsername[1];
+//    }
 
-    }
 
-        public void handleQueueCommand() {
-        // handle the queue command from client
-           System.out.println("JOINED THE QUEUE");
-    }
 
-    // Check if the username is taken by checking a Hashset of existing users
-    // Return true if the username is taken, false otherwise
-    private boolean isUsernameTaken(String username) {
-        return existingUsers.contains(username);
-    }
 
 
     public static void main(String[] args) {

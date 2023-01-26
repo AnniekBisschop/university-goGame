@@ -32,11 +32,11 @@ public class Game {
      * Inside the function:
      * 1. Creates a new game with 2 players and a board
      * */
-    public Game(Player playerBlack, Player playerWhite, Board board) {
+    public Game(Player playerBlack, Player playerWhite) {
         this.playerBlack = playerBlack;
         this.playerWhite = playerWhite;
         currentPlayer = playerBlack;
-        this.board= board;
+        Board board = new Board();
         this.boardHistory = new ArrayList<>();
     }
 

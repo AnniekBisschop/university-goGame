@@ -66,9 +66,7 @@ public class Client implements Runnable {
         }
     }
 
-    public void sendMessage(String message) {
-        outputFromClient.println(message);
-    }
+
 
     public void receiveMessageFromServer(){
         System.out.println("waiting for message from server");
@@ -78,7 +76,9 @@ public class Client implements Runnable {
             throw new RuntimeException(e);
         }
     }
-
+    public void sendMessage(String message) {
+        outputFromClient.println(message);
+    }
     public void sendUsernameToServer(String name) {
         sendMessage(USERNAME + SEPARATOR + name);
     }
