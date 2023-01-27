@@ -32,8 +32,8 @@ public class GameHandler {
     }
 
     public void processInput(String input) {
-        player1.sendMessageToClient("test");
-        player2.sendMessageToClient("test");
+        player1.sendMessageToClient("Finally!! THis is the input: " + input);
+        player2.sendMessageToClient("AND this too" + input);
     }
 
 //    public void validateMove(ClientHandler player, String move) {

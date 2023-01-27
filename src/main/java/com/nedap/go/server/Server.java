@@ -24,11 +24,13 @@ public class Server implements Runnable {
     static HashSet<String> existingUsers = new HashSet<>();
     // variable to keep track of number of games started
     private int numGamesStarted;
+    private HashMap<Player, GameHandler> gameHandlers;
 
     public Server(int port) {
         this.port = port;
         clientHandlers = new ArrayList<>();
         waitingPlayers = new LinkedList<>();
+        gameHandlers = new HashMap<>();
     }
 
     @Override
@@ -64,6 +66,10 @@ public class Server implements Runnable {
         }
     }
 
+    public void processInputFromClient(Player player, String input) {
+        GameHandler gameHandler = gameHandlers.get(player);
+        gameHandler.processInput(input);
+    }
     public Player addToQueue(String username, ClientHandler clientHandler) {
         Player playerToAdd = new Player(username, clientHandler);
         waitingPlayers.offer(playerToAdd); // add to waiting players queue
@@ -88,6 +94,8 @@ public class Server implements Runnable {
             GameHandler newGameHandler = new GameHandler();
             newGameHandler.startNewGame(player1, player2, this);
             numGamesStarted++;
+            gameHandlers.put(player1, newGameHandler);
+            gameHandlers.put(player2, newGameHandler);
         }
     }
     public int getNumGamesStarted() {

@@ -72,7 +72,7 @@ public class ClientHandler implements Runnable {
                         }
                         break;
                     case MOVE:
-
+                        server.processInputFromClient(player, inputLine);
                     default:
                         out.println(ERROR);
                         break;
