@@ -29,7 +29,7 @@ import static com.nedap.go.server.Server.existingUsers;
 public class ClientHandler implements Runnable {
     private Socket socket;
     private BufferedReader in;
-    private PrintWriter out;
+    PrintWriter out;
     private Server server;
     private String username;
     private boolean queueCommandReceived = false;
@@ -55,7 +55,7 @@ public class ClientHandler implements Runnable {
                 String command = parts[0];
                 switch (command) {
                     case HELLO:
-                        out.println(WELCOME);
+                        sendMessageToClient(WELCOME);
                         break;
                     case USERNAME:
                        username = handleUserName(inputLine);
@@ -66,9 +66,10 @@ public class ClientHandler implements Runnable {
                         } else {
                             server.addToQueue(this);
                             queueCommandReceived = true;
-                            out.println();
                         }
                         break;
+                    case MOVE:
+                        sendMessageToClient("Move received");
                     default:
                         out.println(ERROR);
                         break;
@@ -83,6 +84,10 @@ public class ClientHandler implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void sendMessageToClient(String message) {
+        out.println(message);
     }
 
     private String handleUserName(String inputLine) throws IOException {

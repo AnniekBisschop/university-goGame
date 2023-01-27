@@ -29,8 +29,6 @@ public class Server implements Runnable {
         waitingPlayers = new LinkedList<>();
     }
 
-    //queue.
-
     @Override
     public void run() {
         try {
@@ -64,7 +62,6 @@ public class Server implements Runnable {
         }
     }
 
-
     public void addToQueue(ClientHandler clientHandler) {
         waitingPlayers.offer(clientHandler); // add to waiting players queue
         System.out.println(clientHandler.getUsername() + " JOINED THE QUEUE");
@@ -80,39 +77,25 @@ public class Server implements Runnable {
         }
     }
 
+    private boolean newGameStarted(){
+        return true;
+    }
+
     private void startNewGameIfPossible() {
         if (waitingPlayers.size() >= 2) {
             ClientHandler player1 = waitingPlayers.poll();
             ClientHandler player2 = waitingPlayers.poll();
-            System.out.println("GAME STARTED");
-//            GameHandler newGameHandler = new GameHandler();
-//         //newGameHandler.startNewGame(player1, player2, this);
-//            activeGameHandlers.add(newGameHandler);
+            GameHandler newGameHandler = new GameHandler();
+//            newGameHandler.startNewGame(player1, player2, this);
+            player1.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
+            player2.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
+            activeGameHandlers.add(newGameHandler);
             numGamesStarted++;
         }
     }
     public int getNumGamesStarted() {
         return numGamesStarted;
     }
-
-//   public String handleUsername(BufferedReader in, PrintWriter out) throws IOException {
-//       String username = in.readLine();
-//       System.out.println("HandleUsername after readline:" + username);
-//       String[] splitUsername = username.split(SEPARATOR);
-//       while (isUsernameTaken(splitUsername[1])) {
-//           out.println(USERNAMETAKEN + SEPARATOR + "Please enter another USERNAME");
-//           splitUsername = in.readLine().split(SEPARATOR);
-//       }
-//        existingUsers.add(splitUsername[1]);
-//        for (String user : existingUsers) {
-//            System.out.println(JOINED + SEPARATOR + user);
-//        }
-//        return splitUsername[1];
-//    }
-
-
-
-
 
     public static void main(String[] args) {
         Server server = new Server(900);

@@ -28,7 +28,6 @@ public class Game {
      * Constructor name: Game
      * @param playerBlack (Player)
      * @param playerWhite (Player)
-     * @param board (Board)
      * Inside the function:
      * 1. Creates a new game with 2 players and a board
      * */
@@ -85,29 +84,6 @@ public class Game {
 
        return boardHistory.contains(boardAfterMove.toString());
    }
-//       boolean temporaryKo = false;
-
-//       for (Board historyBoard : boardHistory) {
-//           for (int i = 0; i < BOARD_SIZE; i++) {
-//               for (int j = 0; j < BOARD_SIZE; j++) {
-//                   if (historyBoard.getStones(i, j) != boardAfterMove.getStones(i, j)) {
-//                       temporaryKo = false;
-//                       continue; // Should go to the next board in history (back to the for each)
-//                   } else if (historyBoard.getStones(i, j) == boardAfterMove.getStones(i, j)) {
-//                       temporaryKo = true;
-//                   }
-//               }
-//           if (historyBoard.equals(boardAfterMove)) {
-//               System.out.println("The current board is the same as a previous board in the history.");
-//               return true;
-//           }
-//       }
-//       System.out.println("The current board is different from the previous board in the history.");
-//       return false;
-
-
-    //Illegal moves: A player cannot place a stone on a point that is already occupied or that would violate any of the other rules.
-
 
     /**
      * Function name: pass
