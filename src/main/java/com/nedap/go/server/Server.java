@@ -1,5 +1,7 @@
 package com.nedap.go.server;
 
+import com.nedap.go.client.Player;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +19,7 @@ public class Server implements Runnable {
     // Keep track of the active GameHandlers.
     private List<GameHandler> activeGameHandlers;
     // queue to keep track of waiting players (collection framework)
-    private Queue<ClientHandler> waitingPlayers;
+    private Queue<Player> waitingPlayers;
     // Keep track of all connected clients, joined and not joined the queue
     static HashSet<String> existingUsers = new HashSet<>();
     // variable to keep track of number of games started
@@ -62,34 +64,29 @@ public class Server implements Runnable {
         }
     }
 
-    public void addToQueue(ClientHandler clientHandler) {
-        waitingPlayers.offer(clientHandler); // add to waiting players queue
+    public Player addToQueue(String username, ClientHandler clientHandler) {
+        Player playerToAdd = new Player(username, clientHandler);
+        waitingPlayers.offer(playerToAdd); // add to waiting players queue
         System.out.println(clientHandler.getUsername() + " JOINED THE QUEUE");
         startNewGameIfPossible();
+        return playerToAdd;
     }
 
-    public void removeFromQueue(ClientHandler clientHandler) {
-        if (waitingPlayers.contains(clientHandler)) {
-            waitingPlayers.remove(clientHandler);
-            out.println(clientHandler.getUsername() +"REMOVED FROM QUEUE");
+    public void removeFromQueue(Player player) {
+        if (waitingPlayers.contains(player)) {
+            waitingPlayers.remove(player);
+            out.println(player.getUsername() +"REMOVED FROM QUEUE");
         } else {
-            out.println(clientHandler + " not found in the queue");
+            out.println(player + " not found in the queue");
         }
-    }
-
-    private boolean newGameStarted(){
-        return true;
     }
 
     private void startNewGameIfPossible() {
         if (waitingPlayers.size() >= 2) {
-            ClientHandler player1 = waitingPlayers.poll();
-            ClientHandler player2 = waitingPlayers.poll();
+            Player player1 = waitingPlayers.poll();
+            Player player2 = waitingPlayers.poll();
             GameHandler newGameHandler = new GameHandler();
-//            newGameHandler.startNewGame(player1, player2, this);
-            player1.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
-            player2.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
-            activeGameHandlers.add(newGameHandler);
+            newGameHandler.startNewGame(player1, player2, this);
             numGamesStarted++;
         }
     }

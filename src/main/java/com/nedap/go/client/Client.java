@@ -29,6 +29,8 @@ public class Client implements Runnable {
        }
     }
 
+
+
     public void run() {
         System.out.println("Please enter your command:");
         while (running) {
@@ -98,9 +100,9 @@ public class Client implements Runnable {
     }
 
     public static void main(String[] args) {
-        Client client = new Client("localhost", 900);
-        Thread thread = new Thread(client);
-        thread.start();
+       Client client = new Client("localhost", 900);
+       Thread thread = new Thread(client);
+       thread.start();
     }
 }
 

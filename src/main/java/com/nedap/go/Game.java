@@ -14,7 +14,7 @@ import static com.nedap.go.board.Board.*;
 
 public class Game {
 
-    public Board board;
+    private Board board;
 
     // ArrayList to store previous states of the board
     private static ArrayList<String> boardHistory;
@@ -35,7 +35,7 @@ public class Game {
         this.playerBlack = playerBlack;
         this.playerWhite = playerWhite;
         currentPlayer = playerBlack;
-        Board board = new Board();
+        this.board = new Board();
         this.boardHistory = new ArrayList<>();
     }
 

@@ -32,7 +32,10 @@ public class ClientHandler implements Runnable {
     PrintWriter out;
     private Server server;
     private String username;
+    private Player player;
+    private GameHandler gameHandler;
     private boolean queueCommandReceived = false;
+
 
     public ClientHandler(Socket socket, Server server) {
         this.socket = socket;
@@ -55,21 +58,21 @@ public class ClientHandler implements Runnable {
                 String command = parts[0];
                 switch (command) {
                     case HELLO:
-                        sendMessageToClient(WELCOME);
+                        sendMessageFromClientHandler(WELCOME);
                         break;
                     case USERNAME:
                        username = handleUserName(inputLine);
                         break;
                     case QUEUE:
                         if (queueCommandReceived) {
-                            server.removeFromQueue(this);
+                            server.removeFromQueue(player);
                         } else {
-                            server.addToQueue(this);
+                            player = server.addToQueue(username, this);
                             queueCommandReceived = true;
                         }
                         break;
                     case MOVE:
-                        sendMessageToClient("Move received");
+
                     default:
                         out.println(ERROR);
                         break;
@@ -86,10 +89,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public void sendMessageToClient(String message) {
+    public void sendMessageFromClientHandler(String message) throws IOException {
         out.println(message);
     }
-
     private String handleUserName(String inputLine) throws IOException {
         String username = inputLine;
         String[] splitUsername = username.split(SEPARATOR);

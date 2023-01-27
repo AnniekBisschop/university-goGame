@@ -7,10 +7,15 @@
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/tui/Tui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/ClientTui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/GameHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/GameHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" afterDir="false" />
@@ -61,9 +66,27 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/nedap/go/client" />
+    </key>
+  </component>
+  <component name="RunManager">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.Client" />
+      <module name="gogame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nedap.go.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientTui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.ClientTui" />
       <module name="gogame" />
       <extension name="coverage">
         <pattern>
@@ -101,22 +124,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoardTest.testCopyBoard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gogame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.nedap.go.gui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
-      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.BoardTest" />
-      <option name="METHOD_NAME" value="testCopyBoard" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GameTest.testIsCaptured" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gogame" />
       <extension name="coverage">
@@ -134,19 +141,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ClientTui" />
       <item itemvalue="Application.Tui" />
       <item itemvalue="Application.Server" />
       <item itemvalue="Application.Client" />
-      <item itemvalue="JUnit.BoardTest.testCopyBoard" />
       <item itemvalue="JUnit.GameTest.testIsCaptured" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Client" />
+        <item itemvalue="Application.ClientTui" />
         <item itemvalue="Application.Tui" />
         <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.GameTest.testIsCaptured" />
-        <item itemvalue="JUnit.BoardTest.testCopyBoard" />
       </list>
     </recent_temporary>
   </component>
