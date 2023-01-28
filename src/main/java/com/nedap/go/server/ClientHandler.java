@@ -29,10 +29,11 @@ import static com.nedap.go.server.Server.existingUsers;
 public class ClientHandler implements Runnable {
     private Socket socket;
     private BufferedReader in;
-    PrintWriter out;
+    private PrintWriter out;
     private Server server;
     private String username;
     private Player player;
+    private String playerInput;
     private GameHandler gameHandler;
     private boolean queueCommandReceived = false;
 
@@ -72,9 +73,12 @@ public class ClientHandler implements Runnable {
                         }
                         break;
                     case MOVE:
+                        //handle
+                        break;
                     case PASS:
                     case QUIT:
-                        server.processInputFromClient(player, inputLine);
+                        playerInput = inputLine;
+                        server.processInputFromClient(player, playerInput);
                         break;
                     default:
                         out.println(ERROR);
@@ -122,11 +126,28 @@ public class ClientHandler implements Runnable {
         return username;
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public BufferedReader getIn() {
+        return in;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public PrintWriter getOut() {
+        return out;
+    }
+
     public void close() throws IOException {
         in.close();
         out.close();
         socket.close();
         existingUsers.remove(username);
     }
+
 }
 

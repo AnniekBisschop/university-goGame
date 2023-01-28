@@ -32,29 +32,33 @@ public class GameHandler {
         player2.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
     }
 
+
     public void processInput(String input) {
-        while(true){
-        String[] parts = input.split(SEPARATOR);
-        String command = parts[0];
-        switch (command) {
-            case MOVE:
-                int x = Integer.parseInt(parts[1]);
-                int y = Integer.parseInt(parts[2]);
-                // Pass the move coordinates to the game object to make the move
-//                game.makeMove(player1, x, y);
-                // Send the move message to both players
-                player1.sendMessageToClient("MOVE" + SEPARATOR + x + SEPARATOR + y);
-                player2.sendMessageToClient("MOVE" + SEPARATOR + x + SEPARATOR + y);
-                break;
-            case PASS:
-            case QUIT:
-                player1.sendMessageToClient("You said " + input);
-                player2.sendMessageToClient("You said " + input);
-                break;
-            default:
-                break;
-        }
-    }}
+        System.out.println("test" + input);
+        player1.sendMessageToClient(input);
+        player2.sendMessageToClient(input);}
+//        while(true){
+//        String[] parts = input.split(SEPARATOR);
+//        String command = parts[0];
+//        switch (command) {
+//            case MOVE:
+//                int x = Integer.parseInt(parts[1]);
+//                int y = Integer.parseInt(parts[2]);
+//                // Pass the move coordinates to the game object to make the move
+////                game.makeMove(player1, x, y);
+//                // Send the move message to both players
+//                player1.sendMessageToClient("MOVE" + SEPARATOR + x + SEPARATOR + y);
+//                player2.sendMessageToClient("MOVE" + SEPARATOR + x + SEPARATOR + y);
+//                break;
+//            case PASS:
+//            case QUIT:
+//                player1.sendMessageToClient("You said " + input);
+//                player2.sendMessageToClient("You said " + input);
+//                break;
+//            default:
+//                break;
+//        }
+    }
 
 
 
@@ -79,7 +83,7 @@ public class GameHandler {
 //            player1.sendMessageToClient("Player 2 made a move: " + move);
 //        }
 //    }
-}
+
 
 
 

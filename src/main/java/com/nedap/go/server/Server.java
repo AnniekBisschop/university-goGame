@@ -67,9 +67,8 @@ public class Server implements Runnable {
     }
 
     public void processInputFromClient(Player player, String input) {
-        String inputForGame = input;
         GameHandler gameHandler = gameHandlers.get(player);
-        gameHandler.processInput(inputForGame);
+        gameHandler.processInput(input);
     }
     public Player addToQueue(String username, ClientHandler clientHandler) {
         Player playerToAdd = new Player(username, clientHandler);

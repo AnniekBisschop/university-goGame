@@ -14,9 +14,9 @@ public class ClientTui {
         Scanner scanner = new Scanner(System.in);
         Client client = new Client("localhost", 900);
         Thread thread = new Thread(client);
-       thread.start();
-        System.out.println("Does this work?");
-        client.run();
+        thread.start();
+        System.out.println("Please enter your command:");
+//        client.run();
 
     }
 }

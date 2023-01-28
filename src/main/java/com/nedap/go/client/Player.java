@@ -30,6 +30,10 @@ public class Player {
         return username;
     }
 
+    public ClientHandler getClientHandler() {
+        return clientHandler;
+    }
+
     public void sendMessageToClient(String message) {
         try {
             clientHandler.sendMessageFromClientHandler(message);

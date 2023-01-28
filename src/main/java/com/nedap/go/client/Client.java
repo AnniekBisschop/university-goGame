@@ -30,33 +30,39 @@ public class Client implements Runnable {
     }
 
 
-
+    @Override
     public void run() {
-        System.out.println("Please enter your command:");
+        System.out.println("First testline");
         while (running) {
             try {
                 String message = in.readLine();
+                System.out.println("After in.readLine message " + message );
                 if(message == null) continue;
                 String[] parts = message.split(SEPARATOR);
                 String command = parts[0];
                 switch (command) {
                     case HELLO:
                         sendMessage(HELLO);
+                        System.out.println("in Hello");
                         break;
                     case USERNAME:
                         sendUsernameToServer(parts[1]);
+                        System.out.println("in Username");
                         break;
                     case QUEUE:
                         sendMessage(QUEUE);
+                        System.out.println("in queue");
                         break;
                     case MOVE:
                         move(parts[1], parts[2]);
                         break;
                     case PASS:
                         sendMessage(PASS);
+                        System.out.println("in Pass");
                         break;
                     case QUIT:
                         sendMessage(QUIT);
+                        System.out.println("in quit");
                         break;
                     default:
                         break;
