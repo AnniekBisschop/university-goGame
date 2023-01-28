@@ -52,11 +52,11 @@ public class Client implements Runnable {
                     case MOVE:
                         move(parts[1], parts[2]);
                         break;
-                    case QUIT:
-                        sendMessage(QUIT);
-                        break;
                     case PASS:
                         sendMessage(PASS);
+                        break;
+                    case QUIT:
+                        sendMessage(QUIT);
                         break;
                     default:
                         break;
@@ -67,8 +67,6 @@ public class Client implements Runnable {
             }
         }
     }
-
-
 
     public void receiveMessageFromServer(){
         System.out.println("waiting for message from server");
@@ -99,10 +97,10 @@ public class Client implements Runnable {
         }
     }
 
-    public static void main(String[] args) {
-       Client client = new Client("localhost", 900);
-       Thread thread = new Thread(client);
-       thread.start();
-    }
+//    public static void main(String[] args) {
+//       Client client = new Client("localhost", 900);
+//       Thread thread = new Thread(client);
+//       thread.start();
+//    }
 }
 

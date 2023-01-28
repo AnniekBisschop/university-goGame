@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/ClientHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/GameHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/GameHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/server/Server.class" afterDir="false" />
@@ -65,7 +66,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/nedap/go/client" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ClientTui">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.Client" />
       <module name="gogame" />
@@ -79,7 +80,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientTui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ClientTui" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.ClientTui" />
       <module name="gogame" />
       <extension name="coverage">
@@ -105,7 +106,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Tui" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.tui.Tui" />
       <module name="gogame" />
       <extension name="coverage">
@@ -143,8 +144,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client" />
         <item itemvalue="Application.ClientTui" />
+        <item itemvalue="Application.Client" />
         <item itemvalue="Application.Tui" />
         <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.GameTest.testIsCaptured" />

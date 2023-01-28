@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.nedap.go.Protocol.NEWGAME;
-import static com.nedap.go.Protocol.SEPARATOR;
+import static com.nedap.go.Protocol.*;
+import static com.nedap.go.Protocol.QUIT;
+import static com.nedap.go.board.Board.BLACK;
 
 public class GameHandler {
     private Player player1;
@@ -32,13 +33,35 @@ public class GameHandler {
     }
 
     public void processInput(String input) {
-        player1.sendMessageToClient("Finally!! THis is the input: " + input);
-        player2.sendMessageToClient("AND this too" + input);
-    }
+        while(true){
+        String[] parts = input.split(SEPARATOR);
+        String command = parts[0];
+        switch (command) {
+            case MOVE:
+                int x = Integer.parseInt(parts[1]);
+                int y = Integer.parseInt(parts[2]);
+                // Pass the move coordinates to the game object to make the move
+//                game.makeMove(player1, x, y);
+                // Send the move message to both players
+                player1.sendMessageToClient("MOVE" + SEPARATOR + x + SEPARATOR + y);
+                player2.sendMessageToClient("MOVE" + SEPARATOR + x + SEPARATOR + y);
+                break;
+            case PASS:
+            case QUIT:
+                player1.sendMessageToClient("You said " + input);
+                player2.sendMessageToClient("You said " + input);
+                break;
+            default:
+                break;
+        }
+    }}
 
-//    public void validateMove(ClientHandler player, String move) {
+
+
+//    public void validateMove(String move) {
 //        // Validate move here
-//        if(game.isValidMove(move)){
+//        if(game.doMove(3,4,BLACK);){
+//
 //            doMove(player, move);
 //        }else{
 //            player.sendMessageToClient("Invalid move. Please try again.");
