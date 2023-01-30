@@ -162,4 +162,8 @@ public class Game {
     public Player getTurn() {
         return currentPlayer;
     }
+
+    public static int getAmountPasses() {
+        return amountPasses;
+    }
 }

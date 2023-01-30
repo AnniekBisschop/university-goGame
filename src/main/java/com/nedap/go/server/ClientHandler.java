@@ -73,7 +73,8 @@ public class ClientHandler implements Runnable {
                         }
                         break;
                     case MOVE:
-                        //handle
+                        playerInput = inputLine;
+                        player.processInput(playerInput);
                         break;
                     case PASS:
                         playerInput = inputLine;
