@@ -86,7 +86,7 @@ public class GameHandler {
             case QUIT:
                 // Notify both players of the quit
                 player1.sendMessageToClient(QUIT + SEPARATOR + player1.getUsername());
-                player2.sendMessageToClient(QUIT + SEPARATOR + player1.getUsername());
+                player2.sendMessageToClient(QUIT + SEPARATOR + "test");
                 game.isGameOver();
 //                winner = player2.getUsername();
 //                reason = "DISCONNECT";

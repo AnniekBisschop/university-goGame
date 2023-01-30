@@ -32,6 +32,9 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
+        MessageListener listener = new MessageListener();
+        new Thread(listener).start();
+
         while (running) {
             try {
                 String message = in.readLine();
@@ -61,7 +64,6 @@ public class Client implements Runnable {
                     default:
                         break;
                 }
-                receiveMessageFromServer();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -94,6 +96,15 @@ public class Client implements Runnable {
             running = false;
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private class MessageListener implements Runnable {
+        @Override
+        public void run() {
+            while (running) {
+                receiveMessageFromServer();
+            }
         }
     }
 
