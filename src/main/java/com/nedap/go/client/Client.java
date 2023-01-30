@@ -32,7 +32,6 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("First testline");
         while (running) {
             try {
                 String message = in.readLine();
@@ -43,26 +42,21 @@ public class Client implements Runnable {
                 switch (command) {
                     case HELLO:
                         sendMessage(HELLO);
-                        System.out.println("in Hello");
                         break;
                     case USERNAME:
                         sendUsernameToServer(parts[1]);
-                        System.out.println("in Username");
                         break;
                     case QUEUE:
                         sendMessage(QUEUE);
-                        System.out.println("in queue");
                         break;
                     case MOVE:
                         move(parts[1], parts[2]);
                         break;
                     case PASS:
                         sendMessage(PASS);
-                        System.out.println("in Pass");
                         break;
                     case QUIT:
                         sendMessage(QUIT);
-                        System.out.println("in quit");
                         break;
                     default:
                         break;

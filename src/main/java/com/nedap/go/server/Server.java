@@ -66,10 +66,7 @@ public class Server implements Runnable {
         }
     }
 
-    public void processInputFromClient(Player player, String input) {
-        GameHandler gameHandler = gameHandlers.get(player);
-        gameHandler.processInput(input);
-    }
+
     public Player addToQueue(String username, ClientHandler clientHandler) {
         Player playerToAdd = new Player(username, clientHandler);
         waitingPlayers.offer(playerToAdd); // add to waiting players queue
@@ -93,6 +90,8 @@ public class Server implements Runnable {
             Player player2 = waitingPlayers.poll();
             GameHandler newGameHandler = new GameHandler();
             newGameHandler.startNewGame(player1, player2, this);
+            player1.setGameHandler(newGameHandler);
+            player2.setGameHandler(newGameHandler);
             numGamesStarted++;
             gameHandlers.put(player1, newGameHandler);
             gameHandlers.put(player2, newGameHandler);

@@ -11,6 +11,8 @@ public class Player {
 
     private ClientHandler clientHandler;
 
+    private GameHandler gameHandler;
+
     private char color;
 
     /**
@@ -34,12 +36,20 @@ public class Player {
         return clientHandler;
     }
 
-    public void sendMessageToClient(String message) {
+    public synchronized void sendMessageToClient(String message) {
         try {
             clientHandler.sendMessageFromClientHandler(message);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setGameHandler(GameHandler gameHandler) {
+        this.gameHandler = gameHandler;
+    }
+
+    public synchronized void processInput(String input) {
+        gameHandler.processInput(input);
     }
 
     //determine move for computer

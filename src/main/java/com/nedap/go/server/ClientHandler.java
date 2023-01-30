@@ -76,9 +76,12 @@ public class ClientHandler implements Runnable {
                         //handle
                         break;
                     case PASS:
+                        playerInput = inputLine;
+                        player.processInput(playerInput);
+                        break;
                     case QUIT:
                         playerInput = inputLine;
-                        server.processInputFromClient(player, playerInput);
+                        player.processInput(playerInput);
                         break;
                     default:
                         out.println(ERROR);
