@@ -19,9 +19,10 @@ public class Player {
      * This constructor creates a new player
      * @param username (String) is the name of the player
      * */
-    public Player(String username, ClientHandler clientHandler) {
+    public Player(String username, char color, ClientHandler clientHandler) {
         this.username = username;
         this.clientHandler = clientHandler;
+        this.color = color;
     }
 
     /**
@@ -30,6 +31,14 @@ public class Player {
      */
     public String getUsername() {
         return username;
+    }
+
+    public char getColor() {
+        return color;
+    }
+
+    public void setColor(char color) {
+        this.color = color;
     }
 
     public ClientHandler getClientHandler() {
@@ -51,6 +60,8 @@ public class Player {
     public synchronized void processInput(String input) {
         gameHandler.processInput(input);
     }
+
+
 
     //determine move for computer
 }

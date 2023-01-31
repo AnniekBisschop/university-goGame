@@ -12,6 +12,7 @@ import java.util.List;
 import static com.nedap.go.Protocol.*;
 import static com.nedap.go.Protocol.QUIT;
 import static com.nedap.go.board.Board.BLACK;
+import static com.nedap.go.board.Board.WHITE;
 
 public class GameHandler {
     private Player player1;
@@ -29,19 +30,20 @@ public class GameHandler {
         this.player1 = player1;
         this.player2 = player2;
         game = new Game(player1,player2);
-        currentPlayer = player1;
+        currentPlayer = game.getCurrentPlayer();
         // Send message to players to let them know the game has started
         player1.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
         player2.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
         // Notify the player who can make the first move
         player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
+        player1.sendMessageToClient(game.printCurrentBoard());
+        player2.sendMessageToClient(game.printCurrentBoard());
     }
 
 
 
 
         public synchronized void processInput(String input) {
-            System.out.println("Input in processInput()" + input);
             String[] parts = input.split(SEPARATOR);
             String command = parts[0];
             switch (command) {
@@ -52,9 +54,22 @@ public class GameHandler {
 //                   * Only allowed when it is the player's turn.
 //                   *Syntax: MOVE~<ROW>~<COL> */
 //                // Get move information
-//                int row = Integer.parseInt(parts[1]);
-//                int col = Integer.parseInt(parts[2]);
-////                String player = parts[3];
+                int row = Integer.parseInt(parts[1]);
+                int col = Integer.parseInt(parts[2]);
+
+                // update the board and switch the current player
+                game.doMove(row-1,col-1, currentPlayer.getColor());
+                currentPlayer = currentPlayer == player1 ? player2 : player1;
+                player1.sendMessageToClient(game.printCurrentBoard());
+                player2.sendMessageToClient(game.printCurrentBoard());
+
+                // notify the players of the updated board state and whose turn it is
+//                currentPlayer.sendMessageToClient("NOTYOURTURN" + SEPARATOR + currentPlayer.getUsername());
+//
+//                currentPlayer.sendMessageToClient(YOURTURN + SEPARATOR + currentPlayer.getUsername());
+//                currentPlayer.sendMessageToClient(game.printCurrentBoard());
+
+
 ////
 ////                if (turn == 1 && !player.equals(player1.getUsername()) || turn == 2 && !player.equals(player2.getUsername())) {
 ////                    // Not player's turn
@@ -92,8 +107,7 @@ public class GameHandler {
 //                    currentPlayer = player1;
 //                    player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
 //                }
-                player1.sendMessageToClient(MOVE + input + "recieved");
-                player2.sendMessageToClient(MOVE + "recieved");
+
                 break;
             case PASS:
                 game.pass();
@@ -128,6 +142,11 @@ public class GameHandler {
                 break;
         }
     }
+
+
+
+
+
 }
 
 

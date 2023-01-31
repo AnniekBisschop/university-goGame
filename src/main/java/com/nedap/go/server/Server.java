@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.util.*;
 
 import static com.nedap.go.Protocol.*;
+import static com.nedap.go.board.Board.BLACK;
+import static com.nedap.go.board.Board.WHITE;
 import static java.lang.System.out;
 
 public class Server implements Runnable {
@@ -67,8 +69,8 @@ public class Server implements Runnable {
     }
 
 
-    public Player addToQueue(String username, ClientHandler clientHandler) {
-        Player playerToAdd = new Player(username, clientHandler);
+    public Player addToQueue(String username, char color, ClientHandler clientHandler) {
+        Player playerToAdd = new Player(username, color, clientHandler);
         waitingPlayers.offer(playerToAdd); // add to waiting players queue
         System.out.println(clientHandler.getUsername() + " JOINED THE QUEUE");
         startNewGameIfPossible();
@@ -88,6 +90,11 @@ public class Server implements Runnable {
         if (waitingPlayers.size() >= 2) {
             Player player1 = waitingPlayers.poll();
             Player player2 = waitingPlayers.poll();
+            // Assign player1 color
+            player1.setColor(BLACK);
+            // Assign player2 color
+            player2.setColor(WHITE);
+
             GameHandler newGameHandler = new GameHandler();
             newGameHandler.startNewGame(player1, player2, this);
             player1.setGameHandler(newGameHandler);

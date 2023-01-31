@@ -71,13 +71,20 @@ public class Client implements Runnable {
     }
 
     public void receiveMessageFromServer(){
-        System.out.println("waiting for message from server");
         try {
-            System.out.println(inputFromServer.readLine() + " received message from server");
+            String message = inputFromServer.readLine();
+            if (message == null) {
+                running = false;
+                close();
+                return;
+            }
+            System.out.println(message);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+           close();
         }
     }
+
+
     public void sendMessage(String message) {
         outputFromClient.println(message);
     }
@@ -85,13 +92,14 @@ public class Client implements Runnable {
         sendMessage(USERNAME + SEPARATOR + name);
     }
 
-    //parse int??
     public void move(String row, String column) {
         sendMessage(MOVE + SEPARATOR + row + SEPARATOR + column);
     }
 
     public void close() {
         try {
+            inputFromServer.close();
+            outputFromClient.close();
             socket.close();
             running = false;
         } catch (IOException e) {

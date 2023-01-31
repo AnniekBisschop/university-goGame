@@ -19,22 +19,22 @@ public class Game {
     // ArrayList to store previous states of the board
     private static ArrayList<String> boardHistory;
 
-    private  Player playerBlack;
-    private Player playerWhite;
+    private  Player player1;
+    private Player player2;
     private Player currentPlayer;
     private static int amountPasses = 0;
 
     /**
      * Constructor name: Game
-     * @param playerBlack (Player)
-     * @param playerWhite (Player)
+     * @param player1 (Player)
+     * @param player2 (Player)
      * Inside the function:
      * 1. Creates a new game with 2 players and a board
      * */
-    public Game(Player playerBlack, Player playerWhite) {
-        this.playerBlack = playerBlack;
-        this.playerWhite = playerWhite;
-        currentPlayer = playerBlack;
+    public Game(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+        currentPlayer = player1;
         this.board = new Board();
         this.boardHistory = new ArrayList<>();
     }
@@ -45,12 +45,15 @@ public class Game {
      * 1. players take turn, alternation of player
      * */
     public void switchPlayer() {
-        if (currentPlayer == playerBlack) {
-            currentPlayer = playerWhite;
+        if (currentPlayer == player1) {
+            currentPlayer = player2;
+            player1.setColor(BLACK);
+            player2.setColor(WHITE);
         } else {
-            currentPlayer = playerBlack;
-        }
-    }
+            currentPlayer = player1;
+            player2.setColor(BLACK);
+            player1.setColor(WHITE);
+        }}
 //TODO: Write more logic to check valid move
     //TODO write JAVADOC
     public void doMove(int row, int col, char color){
@@ -68,7 +71,7 @@ public class Game {
         //TODO removeStones
         ///TODO Resetpass to much? PLacestone has resetPass
         resetPass();
-        switchPlayer();
+//        switchPlayer();
     }
 
     //Ko: A player cannot repeat a board position that has occurred previously in the game.
@@ -166,4 +169,11 @@ public class Game {
     public static int getAmountPasses() {
         return amountPasses;
     }
+
+    public String printCurrentBoard() {
+        // Play the game here
+        return board.printBoard();
+        // Continue the game logic
+    }
+
 }

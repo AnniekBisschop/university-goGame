@@ -34,6 +34,7 @@ public class ClientHandler implements Runnable {
     private String username;
     private Player player;
     private String playerInput;
+    private char color;
     private GameHandler gameHandler;
     private boolean queueCommandReceived = false;
 
@@ -68,7 +69,7 @@ public class ClientHandler implements Runnable {
                         if (queueCommandReceived) {
                             server.removeFromQueue(player);
                         } else {
-                            player = server.addToQueue(username, this);
+                            player = server.addToQueue(username, color, this);
                             queueCommandReceived = true;
                         }
                         break;
