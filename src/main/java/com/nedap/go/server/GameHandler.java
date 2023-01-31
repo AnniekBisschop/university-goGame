@@ -59,47 +59,8 @@ public class GameHandler {
                 player2.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
                 player1.sendMessageToClient(game.printCurrentBoard());
                 player2.sendMessageToClient(game.printCurrentBoard());
-
-
-//                currentPlayer.sendMessageToClient(YOURTURN + SEPARATOR + currentPlayer.getUsername());
-//                currentPlayer.sendMessageToClient(game.printCurrentBoard());
-
-
-////
-////                if (turn == 1 && !player.equals(player1.getUsername()) || turn == 2 && !player.equals(player2.getUsername())) {
-////                    // Not player's turn
-////                    player1.sendMessageToClient(INVALIDMOVE + SEPARATOR + player + SEPARATOR + "Not player's turn");
-////                    player2.sendMessageToClient(INVALIDMOVE + SEPARATOR + player + SEPARATOR + "Not player's turn");
-////                    break;
-////                }
-//
-////                if (!game.isValidMove(x, y)) {
-////                    player1.sendMessageToClient(INVALIDMOVE + SEPARATOR + player + SEPARATOR + "Invalid move");
-////                    player2.sendMessageToClient(INVALIDMOVE + SEPARATOR + player + SEPARATOR + "Invalid move");
-////                    // Notify both players that it's their turn again
-////                    player1.sendMessageToClient(YOURTURN + SEPARATOR + player);
-////                    player2.sendMessageToClient(YOURTURN + SEPARATOR + player);
-////                    return;
-////                }
-//
-//                    Sent by the server to indicate the next move that is played.
-//                    This is sent to all players in the game, including the player who performed the move.
-//                    Syntax: MOVE~<USERNAME>~<ROW>~<COL>
-//
-//                * */
-//
-//                // Notify both players of the move
-//                player1.sendMessageToClient(MOVE + SEPARATOR + player1 + row + SEPARATOR + col);
-//                player2.sendMessageToClient(MOVE + SEPARATOR + player1 + row + SEPARATOR + col);
-//                // Update the current player
-//
-//                if (currentPlayer == player1) {
-//                    currentPlayer = player2;
-//                    player2.sendMessageToClient(YOURTURN + SEPARATOR + player2.getUsername());
-//                } else {
-//                    currentPlayer = player1;
-//                    player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
-//                }
+                currentPlayer = game.getCurrentPlayer();
+                game.getCurrentPlayer().sendMessageToClient(YOURTURN + SEPARATOR + currentPlayer.getUsername());
 
                 break;
             case PASS:
