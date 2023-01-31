@@ -55,6 +55,8 @@ public class GameHandler {
                 // update the board and switch the current player
 //                currentPlayer.determineMove();
                 game.doMove(row-1,col-1, game.getCurrentPlayer().getColor());
+                player1.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
+                player2.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
                 player1.sendMessageToClient(game.printCurrentBoard());
                 player2.sendMessageToClient(game.printCurrentBoard());
 
@@ -103,16 +105,16 @@ public class GameHandler {
             case PASS:
                 game.pass();
                 if (game.getAmountPasses() >= 2) {
-                    player1.sendMessageToClient("The game has ended as both players have passed consecutive turns");
-                    player2.sendMessageToClient("The game has ended as both players have passed consecutive turns");
-                    //TODO: gameover(), winner
+                    player1.sendMessageToClient(GAMEOVER);
+                    player2.sendMessageToClient(GAMEOVER);
+                    game.gameOver();
                 }else {
                         if (currentPlayer == player1) {
                             currentPlayer = player2;
-                            player2.sendMessageToClient(PASS+ "by " + player1.getUsername() + YOURTURN + SEPARATOR + player2.getUsername());
+                            player2.sendMessageToClient(PASS+ " by " + player1.getUsername() + SEPARATOR + YOURTURN + SEPARATOR + player2.getUsername());
                         } else {
                             currentPlayer = player1;
-                            player1.sendMessageToClient(PASS+ "by " + player2.getUsername() + YOURTURN + SEPARATOR + player1.getUsername());
+                            player1.sendMessageToClient(PASS+ " by " + player2.getUsername() + YOURTURN + SEPARATOR + player1.getUsername());
                         }
                     break;
                 }

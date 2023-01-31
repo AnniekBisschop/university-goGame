@@ -173,4 +173,9 @@ public class Game {
         // Continue the game logic
     }
 
+    public void gameOver() {
+
+        //getWinner()
+
+    }
 }
