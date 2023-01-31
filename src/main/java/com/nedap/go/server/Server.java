@@ -104,10 +104,22 @@ public class Server implements Runnable {
             gameHandlers.put(player2, newGameHandler);
         }
     }
-    public int getNumGamesStarted() {
-        return numGamesStarted;
-    }
-
+//    public int getNumGamesStarted() {
+//        return numGamesStarted;
+//    }
+//
+//    public int getPort() {
+//            return serverSocket.getLocalPort();
+//    }
+//
+//    public void stop(){
+//        try {
+//            serverSocket.close();
+//        } catch (IOException e) {
+//            System.out.println("Server is already closed or not even opened at all.");
+//            throw new RuntimeException(e);
+//        }
+//    }
     public static void main(String[] args) {
         Server server = new Server(910);
         Thread thread = new Thread(server);

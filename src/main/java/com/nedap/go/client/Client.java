@@ -1,10 +1,7 @@
 package com.nedap.go.client;
 
-import com.nedap.go.server.Server;
-
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 import static com.nedap.go.Protocol.*;
 
@@ -15,7 +12,7 @@ public class Client implements Runnable {
     private PrintWriter outputFromClient;
     private boolean running;
 
-    public Client(String serverIp, int port) {
+    public Client(InetAddress serverIp, int port) {
         try {
            socket = new Socket(serverIp, port);
             in = new BufferedReader(new InputStreamReader(System.in));
