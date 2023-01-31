@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static com.nedap.go.board.Board.*;
+import static com.nedap.go.Protocol.*;
 
 /**
  * The game class implements the rules of the Go game
@@ -47,12 +48,8 @@ public class Game {
     public void switchPlayer() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
-            player1.setColor(BLACK);
-            player2.setColor(WHITE);
         } else {
             currentPlayer = player1;
-            player2.setColor(BLACK);
-            player1.setColor(WHITE);
         }}
 //TODO: Write more logic to check valid move
     //TODO write JAVADOC
@@ -62,6 +59,11 @@ public class Game {
             board.placeStone(row,col,color);
             Board copyBoard = board.copyBoard();
             boardHistory.add(board.toString());
+            switchPlayer();
+        } else {
+            //TODO: Make communication go through gamehandler
+            currentPlayer.sendMessageToClient(INVALIDMOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + "spot taken, not a valid position or ko-rule violated");
+            currentPlayer.sendMessageToClient(YOURTURN);
         }
         if(isCaptured(row,col)){
             //Change name??? -> Empty fields
@@ -69,18 +71,13 @@ public class Game {
         }
         //TODO if captured
         //TODO removeStones
-        ///TODO Resetpass to much? PLacestone has resetPass
+        ///TODO Resetpass too much? PLacestone has resetPass
         resetPass();
-//        switchPlayer();
     }
 
     //Ko: A player cannot repeat a board position that has occurred previously in the game.
     // Check if the move would violate the rule of ko
-
-
-
     //TODO: JAVADOC
-
    public boolean isKo(int row, int col, char color){
        Board boardAfterMove = board.copyBoard();
        boardAfterMove.placeStone(row, col, color);

@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ClientTui {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Client client = new Client("localhost", 900);
+        Client client = new Client("localhost", 910);
         Thread thread = new Thread(client);
         thread.start();
         System.out.println("Please enter your command:");

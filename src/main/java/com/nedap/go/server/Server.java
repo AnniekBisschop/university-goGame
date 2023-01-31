@@ -109,7 +109,7 @@ public class Server implements Runnable {
     }
 
     public static void main(String[] args) {
-        Server server = new Server(900);
+        Server server = new Server(910);
         Thread thread = new Thread(server);
         thread.start();
 

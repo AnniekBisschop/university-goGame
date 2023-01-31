@@ -60,8 +60,7 @@ public class Player {
     public synchronized void processInput(String input) {
         gameHandler.processInput(input);
     }
+   public void determineMove(){
 
-
-
-    //determine move for computer
+   }
 }

@@ -38,7 +38,6 @@ public class Client implements Runnable {
         while (running) {
             try {
                 String message = in.readLine();
-                System.out.println("After in.readLine message " + message );
                 if(message == null) continue;
                 String[] parts = message.split(SEPARATOR);
                 String command = parts[0];

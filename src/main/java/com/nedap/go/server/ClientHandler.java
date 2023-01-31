@@ -74,13 +74,7 @@ public class ClientHandler implements Runnable {
                         }
                         break;
                     case MOVE:
-                        playerInput = inputLine;
-                        player.processInput(playerInput);
-                        break;
                     case PASS:
-                        playerInput = inputLine;
-                        player.processInput(playerInput);
-                        break;
                     case QUIT:
                         playerInput = inputLine;
                         player.processInput(playerInput);

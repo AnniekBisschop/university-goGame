@@ -48,24 +48,17 @@ public class GameHandler {
             String command = parts[0];
             switch (command) {
             case MOVE:
-//                /*
-//                * MOVE (client)
-//                   Sent by the client to indicate which row(s) or column(s) the player wants to push.
-//                   * Only allowed when it is the player's turn.
-//                   *Syntax: MOVE~<ROW>~<COL> */
-//                // Get move information
+
                 int row = Integer.parseInt(parts[1]);
                 int col = Integer.parseInt(parts[2]);
 
                 // update the board and switch the current player
-                game.doMove(row-1,col-1, currentPlayer.getColor());
-                currentPlayer = currentPlayer == player1 ? player2 : player1;
+//                currentPlayer.determineMove();
+                game.doMove(row-1,col-1, game.getCurrentPlayer().getColor());
                 player1.sendMessageToClient(game.printCurrentBoard());
                 player2.sendMessageToClient(game.printCurrentBoard());
 
-                // notify the players of the updated board state and whose turn it is
-//                currentPlayer.sendMessageToClient("NOTYOURTURN" + SEPARATOR + currentPlayer.getUsername());
-//
+
 //                currentPlayer.sendMessageToClient(YOURTURN + SEPARATOR + currentPlayer.getUsername());
 //                currentPlayer.sendMessageToClient(game.printCurrentBoard());
 
@@ -86,9 +79,7 @@ public class GameHandler {
 ////                    player2.sendMessageToClient(YOURTURN + SEPARATOR + player);
 ////                    return;
 ////                }
-//                // Update game state
-////                game.doMove(row, col, BLACK);
-//                /*MOVE (server)
+//
 //                    Sent by the server to indicate the next move that is played.
 //                    This is sent to all players in the game, including the player who performed the move.
 //                    Syntax: MOVE~<USERNAME>~<ROW>~<COL>
@@ -118,10 +109,10 @@ public class GameHandler {
                 }else {
                         if (currentPlayer == player1) {
                             currentPlayer = player2;
-                            player2.sendMessageToClient(YOURTURN + SEPARATOR + player2.getUsername());
+                            player2.sendMessageToClient(PASS+ "by " + player1.getUsername() + YOURTURN + SEPARATOR + player2.getUsername());
                         } else {
                             currentPlayer = player1;
-                            player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
+                            player1.sendMessageToClient(PASS+ "by " + player2.getUsername() + YOURTURN + SEPARATOR + player1.getUsername());
                         }
                     break;
                 }

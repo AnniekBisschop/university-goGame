@@ -9,3 +9,11 @@ R
 "src/main/java/com/nedap/go/Go.java,b/4/b4e31bb9ae829952addfc3434ef9d310551120d9
 Y
 )src/main/java/com/nedap/go/gui/GoGui.java,8/f/8f62651fbe0a13374f006d23e4e6a3e035e257f9
+]
+-src/main/java/com/nedap/go/gui/GoGuiImpl.java,b/3/b31520402a93ed8b0df21d09d3e0b9b8bfb8ac28
+c
+3src/main/java/com/nedap/go/gui/GoGuiIntegrator.java,4/a/4ad32d4aa4a93491e943a5aa30810f2a69769109
+T
+$src/main/java/com/nedap/go/temp.java,0/4/044e5da69aca5895a4d076a4ef54a454455fd50e
+\
+,src/test/java/com/nedap/go/gui/GameTest.java,3/0/306defdf6fbbfe6ed3c1ec8de6bcf430a4d83206
