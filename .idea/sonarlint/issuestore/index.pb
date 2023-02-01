@@ -15,5 +15,3 @@ c
 3src/main/java/com/nedap/go/gui/GoGuiIntegrator.java,4/a/4ad32d4aa4a93491e943a5aa30810f2a69769109
 T
 $src/main/java/com/nedap/go/temp.java,0/4/044e5da69aca5895a4d076a4ef54a454455fd50e
-\
-,src/test/java/com/nedap/go/gui/GameTest.java,3/0/306defdf6fbbfe6ed3c1ec8de6bcf430a4d83206

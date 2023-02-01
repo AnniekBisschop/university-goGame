@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 
 import static com.nedap.go.Protocol.*;
+import static com.nedap.go.board.Board.BOARD_SIZE;
 
 public class Client implements Runnable {
     private Socket socket;
@@ -80,10 +81,12 @@ public class Client implements Runnable {
             switch(command){
                 case YOURTURN:
                     if(parts[1].equals("CP") || parts[1].equals("cp")){
-                        System.out.println("TURN computerplayer");
                         String computerMove = determineMove();
                         sendMessage(computerMove);
+                        break;
                     }
+               default:
+                   break;
             }
             System.out.println(message);
         } catch (IOException e) {
@@ -92,7 +95,22 @@ public class Client implements Runnable {
     }
 
     public String determineMove() {
-        String move = "MOVE~4~5";
+        int row;
+        int column;
+        String move = "";
+
+        do {
+            row = (int) (Math.random() * BOARD_SIZE);
+            if (row == 0) {
+                row = 1;
+            }
+            column = (int) (Math.random() * BOARD_SIZE);
+            if (column == 0) {
+                column = 1;
+            }
+            move = "MOVE~" + row + "~" + column;
+        } while (row < 0 || row >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE);
+
         return move;
     }
 

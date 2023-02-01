@@ -23,8 +23,6 @@ public class Game {
     private  Player player1;
     private Player player2;
     private Player currentPlayer;
-    int[] rowStep = {-1, 0, 1, 0};
-    int[] colStep = {0, 1, 0, -1};
     private static int amountPasses = 0;
 
     /**
@@ -122,27 +120,98 @@ public class Game {
      * 3. It then checks if the stone is surrounded by opponent's stone by checking if all the four positions orthogonally
      * 4. If it is surrounded, it returns true
      * */
-    public boolean isCaptured(int row, int column){
+//    public boolean isCaptured(int row, int column){
+//        //get color
+//        char color = board.getStones(row, column);
+//        char opponentColor = (color == BLACK) ? WHITE : BLACK;
+//        if (color == EMPTY || color != opponentColor) {
+//            return false;
+//        }
+//
+//        //If all four neighboring spots contain the opponent's color, the code returns true. Otherwise, it returns false.
+//        if ((row > 0 && board.getStones(row-1, column) == opponentColor) &&
+//                (row < BOARD_SIZE-1 && board.getStones(row+1, column) == opponentColor) &&
+//                (column > 0 && board.getStones(row, column-1) == opponentColor) &&
+//                (column < BOARD_SIZE-1 && board.getStones(row, column+1) == opponentColor)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
+    public boolean isCaptured(int row, int column) {
+        //get color
         char color = board.getStones(row, column);
+
+        //empty spot cannot be captured
         if (color == EMPTY) {
             return false;
         }
-        //check the color of the opponent
-        char opponentColor = (color == BLACK) ? WHITE : BLACK;
-        if ((row > 0 && board.getStones(row-1, column) == opponentColor) &&
-                (row < BOARD_SIZE-1 && board.getStones(row+1, column) == opponentColor) &&
-                (column > 0 && board.getStones(row, column-1) == opponentColor) &&
-                (column < BOARD_SIZE-1 && board.getStones(row, column+1) == opponentColor)) {
-            return true;
-        } else {
-            return false;
+        if (hasLiberties(row, column)) return false;
+
+
+        //if no liberties, check neighboring spots recursively
+
+
+        //checks spot one row above the current spot (row-1) contains a stone of the same color as the current spot.
+        // If it does, the function calls isCaptured with the coordinates of that spot as arguments.
+        if (row > 0 && board.getStones(row-1, column) == color) {
+            if (!isCaptured(row-1, column)) {
+               // returns false. This is because if a neighboring spot contains a stone of the same color
+                return false;
+            }
         }
+
+        //This checks if the spot one row below the current spot (row+1) contains a stone of the same color as the current spot.
+        if (row < BOARD_SIZE-1 && board.getStones(row+1, column) == color) {
+            if (!isCaptured(row+1, column)) {
+                return false;
+            }
+        }
+
+        //spot one column to the left of the current spot (column-1) contains a stone of the same color as the current spot.
+        if (column > 0 && board.getStones(row, column-1) == color) {
+            if (!isCaptured(row, column-1)) {
+                return false;
+            }
+        }
+
+        //spot one column to the right of the current spot (column-1) contains a stone of the same color as the current spot.
+        if (column < BOARD_SIZE-1 && board.getStones(row, column+1) == color) {
+            if (!isCaptured(row, column+1)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    //Own color = white
+    //check if the group has liberties
+    private boolean hasLiberties(int row, int column) {
+        //checks if the spot one row above the current spot (row-1) is empty
+        if (row > 0 && board.getStones(row -1, column) == EMPTY) {
+            return true;
+        }
+        //checks if the spot one row below the current spot (row+1) is empty
+        if (row < BOARD_SIZE-1 && board.getStones(row +1, column) == EMPTY) {
+            return true;
+        }
+
+        //checks if the spot one column to the left of the current spot (column-1) is empty.
+        if (column > 0 && board.getStones(row, column -1) == EMPTY) {
+            return true;
+        }
+        //checks if the spot one column to the right of the current spot (column-1) is empty.
+        if (column < BOARD_SIZE-1 && board.getStones(row, column +1) == EMPTY) {
+            return true;
+        }
+        return false;
+    }
+
+
     //Waar is black omsingeld door wit = groep zwart gecaptured
     // loop door board
     // is eigen kleur of leeg -> continue (lijst met eigen kleur of leeg? indexes)
+
     //-> niet captured
     //check liberties --> niet caputured
 
@@ -195,67 +264,12 @@ public class Game {
 
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
     public void gameOver() {
 
     }
-
-//    public boolean isCaptured(int row, int column) {
-//        //sets the value of color to the result of the board.getStones(row, column)
-//        char color = board.getStones(row, column);
-//        if (color == EMPTY) {
-//            return false;
-//        }
-//        //If "color" is equal to BLACK, opponentColor will be assigned the value WHITE.
-//        char opponentColor = (color == BLACK) ? WHITE : BLACK;
-//        //The values in the arrays correspond to the movement direction: -1 in the row direction means moving up,
-//        // 1 means moving down, -1 in the column direction means moving left, and 1 means moving right.
-//
-//        boolean isCaptured = true;
-//        //The check is performed by iterating over 4 neighboring positions (up, right, down, left)
-//        // using the rowStep and colStep arrays, and checking if each neighbor is within the board limits and has the opponent color.
-//        // If any of the neighbors does not have the opponent color, or is not within the board limits,
-//        // isCaptured is set to false and the loop breaks. Finally, the function returns isCaptured.
-//        for (int i = 0; i < 4; i++) {
-//            //adds the rowStep[i] to the row to get the row index of the neighbor and
-//            // adds the colStep[i] to the column to get the column index of the neighbor.
-//            int rowNeighbor = row + rowStep[i];
-//            int colNeighbor = column + colStep[i];
-//            if (rowNeighbor >= 0 && rowNeighbor < BOARD_SIZE && colNeighbor >= 0 && colNeighbor < BOARD_SIZE) {
-//                if (board.getStones(rowNeighbor, colNeighbor) != opponentColor) {
-//                    isCaptured = false;
-//                    break;
-//                }
-//            }
-//            //In the else block, the isCaptured variable is set to false. This is because if the neighboring cell is
-//            // outside of the bounds of the board, it cannot be the same color as the opponent and therefore the stone at the
-//            // original cell cannot be captured.
-//
-//            else {
-//                isCaptured = false;
-//                break;
-//            }
-//        }
-//        //If the loop completes and isCaptured is still true, the function returns isCaptured,
-//        // indicating that the stone is captured.
-//        return isCaptured;
-//    }
-//
-//    public void capture(int row, int column) {
-//        if (isCaptured(row, column)) {
-//            board.setStones(row, column, EMPTY);
-//            for (int i = 0; i < 4; i++) {
-//                int rowNeighbor = row + rowStep[i];
-//                int colNeighbor = column + colStep[i];
-//                if (rowNeighbor >= 0 && rowNeighbor < BOARD_SIZE && colNeighbor >= 0 && colNeighbor < BOARD_SIZE) {
-//                    //recursion keep checking
-//                    capture(rowNeighbor, colNeighbor);
-//                }
-//            }
-//        }
-//    }
-
-
-
-
 
 }
