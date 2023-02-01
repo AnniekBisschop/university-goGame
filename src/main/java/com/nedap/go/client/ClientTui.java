@@ -25,6 +25,7 @@ public class ClientTui {
             Thread thread = new Thread(client);
             thread.start();
             System.out.println("Please enter your command:");
+            System.out.println("When you want to play with a computer player, after the WELCOME message, type USERNAME~CP");
 
         } catch (UnknownHostException e) {
             System.out.println("Not a correct connection");

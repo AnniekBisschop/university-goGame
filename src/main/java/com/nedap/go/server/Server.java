@@ -104,9 +104,9 @@ public class Server implements Runnable {
             gameHandlers.put(player2, newGameHandler);
         }
     }
-//    public int getNumGamesStarted() {
-//        return numGamesStarted;
-//    }
+    public int getNumGamesStarted() {
+        return numGamesStarted;
+    }
 //
 //    public int getPort() {
 //            return serverSocket.getLocalPort();

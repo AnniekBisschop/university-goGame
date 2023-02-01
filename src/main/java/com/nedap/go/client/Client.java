@@ -74,12 +74,27 @@ public class Client implements Runnable {
                 close();
                 return;
             }
+
+            String[] parts = message.split(SEPARATOR);
+            String command = parts[0];
+            switch(command){
+                case YOURTURN:
+                    if(parts[1].equals("CP") || parts[1].equals("cp")){
+                        System.out.println("TURN computerplayer");
+                        String computerMove = determineMove();
+                        sendMessage(computerMove);
+                    }
+            }
             System.out.println(message);
         } catch (IOException e) {
            close();
         }
     }
 
+    public String determineMove() {
+        String move = "MOVE~4~5";
+        return move;
+    }
 
     public void sendMessage(String message) {
         outputFromClient.println(message);
@@ -112,10 +127,6 @@ public class Client implements Runnable {
         }
     }
 
-//    public static void main(String[] args) {
-//       Client client = new Client("localhost", 900);
-//       Thread thread = new Thread(client);
-//       thread.start();
-//    }
+
 }
 
