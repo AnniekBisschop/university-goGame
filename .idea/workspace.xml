@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/0/306defdf6fbbfe6ed3c1ec8de6bcf430a4d83206" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/ComputerPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client$MessageListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/client/Client$MessageListener.class" afterDir="false" />
@@ -67,7 +66,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/nedap/go/client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest.testIsCaptured">
+  <component name="RunManager" selected="Application.ClientTui">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.Client" />
       <module name="gogame" />
@@ -145,8 +144,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameTest.testIsCaptured" />
         <item itemvalue="Application.ClientTui" />
+        <item itemvalue="JUnit.GameTest.testIsCaptured" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.Tui" />
         <item itemvalue="Application.Server" />
@@ -166,7 +165,8 @@
       <workItem from="1674479054269" duration="12460000" />
       <workItem from="1674635242165" duration="530000" />
       <workItem from="1674636161069" duration="4427000" />
-      <workItem from="1675169972702" duration="33797000" />
+      <workItem from="1675169972702" duration="33842000" />
+      <workItem from="1675258315426" duration="9638000" />
     </task>
     <servers />
   </component>
@@ -195,8 +195,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java</url>
-          <line>143</line>
-          <option name="timeStamp" value="82" />
+          <line>139</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

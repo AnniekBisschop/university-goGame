@@ -60,7 +60,7 @@ public class ClientHandler implements Runnable {
                 String command = parts[0];
                 switch (command) {
                     case HELLO:
-                        sendMessageFromClientHandler(WELCOME);
+                        sendMessageFromClientHandler(WELCOME + SEPARATOR + "server by Anniek");
                         break;
                     case USERNAME:
                        username = handleUserName(inputLine);
@@ -102,7 +102,7 @@ public class ClientHandler implements Runnable {
         String username = inputLine;
         String[] splitUsername = username.split(SEPARATOR);
         while (isUsernameTaken(splitUsername[1])) {
-            out.println(USERNAMETAKEN + SEPARATOR + "Please enter another USERNAME");
+            out.println(USERNAMETAKEN + SEPARATOR + "Please enter another username");
             splitUsername = in.readLine().split(SEPARATOR);
             System.out.println("Received message from client: " + inputLine);
         }

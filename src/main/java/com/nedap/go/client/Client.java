@@ -37,30 +37,31 @@ public class Client implements Runnable {
             try {
                 String message = in.readLine();
                 if(message == null) continue;
-                String[] parts = message.split(SEPARATOR);
-                String command = parts[0];
-                switch (command) {
-                    case HELLO:
-                        sendMessage(HELLO);
-                        break;
-                    case USERNAME:
-                        sendUsernameToServer(parts[1]);
-                        break;
-                    case QUEUE:
-                        sendMessage(QUEUE);
-                        break;
-                    case MOVE:
-                        move(parts[1], parts[2]);
-                        break;
-                    case PASS:
-                        sendMessage(PASS);
-                        break;
-                    case QUIT:
-                        sendMessage(QUIT);
-                        break;
-                    default:
-                        break;
-                }
+                sendMessage(message);
+//                String[] parts = message.split(SEPARATOR);
+//                String command = parts[0];
+//                switch (command) {
+//                    case HELLO:
+//                        sendMessage(HELLO);
+//                        break;
+//                    case USERNAME:
+//                        sendUsernameToServer(parts[1]);
+//                        break;
+//                    case QUEUE:
+//                        sendMessage(QUEUE);
+//                        break;
+//                    case MOVE:
+//                        move(parts[1], parts[2]);
+//                        break;
+//                    case PASS:
+//                        sendMessage(PASS);
+//                        break;
+//                    case QUIT:
+//                        sendMessage(QUIT);
+//                        break;
+//                    default:
+//                        break;
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -75,21 +76,24 @@ public class Client implements Runnable {
                 close();
                 return;
             }
-
             String[] parts = message.split(SEPARATOR);
-            String command = parts[0];
-            switch(command){
-                case YOURTURN:
-                    if(parts[1].equals("CP") || parts[1].equals("cp")){
-                        String computerMove = determineMove();
-                        sendMessage(computerMove);
-                        break;
+            if (parts.length >= 2) {
+                String command = parts[0];
+                if (parts[1].equals("CP") || parts[1].equals("cp")) {
+                    switch(command) {
+                        case YOURTURN:
+                        case INVALIDMOVE:
+                            String computerMove = determineMove();
+                            sendMessage(computerMove);
+                            break;
+                        default:
+                            break;
                     }
-               default:
-                   break;
+                }
             }
             System.out.println(message);
         } catch (IOException e) {
+            System.out.println("oops");
            close();
         }
     }
@@ -108,7 +112,7 @@ public class Client implements Runnable {
             if (column == 0) {
                 column = 1;
             }
-            move = "MOVE~" + row + "~" + column;
+            move = MOVE + SEPARATOR + row + SEPARATOR + column;
         } while (row < 0 || row >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE);
 
         return move;

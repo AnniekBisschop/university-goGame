@@ -24,6 +24,7 @@ public class Game {
     private Player player2;
     private Player currentPlayer;
     private static int amountPasses = 0;
+    private boolean[][] visited = new boolean[BOARD_SIZE][BOARD_SIZE];
 
     /**
      * Constructor name: Game
@@ -63,11 +64,11 @@ public class Game {
         } else {
             //TODO: Make communication go through gamehandler
             currentPlayer.sendMessageToClient(INVALIDMOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + "spot taken, not a valid position or ko-rule violated");
-            currentPlayer.sendMessageToClient(YOURTURN);
+//            currentPlayer.sendMessageToClient(YOURTURN);
         }
         if(isCaptured(row,col)){
-            //Change name??? -> Empty fields
-            capture(row,col);
+
+            makeFieldEmptyCapture(row,col);
             currentPlayer.sendMessageToClient("CAPTURE");
         }
         //TODO if captured
@@ -120,26 +121,13 @@ public class Game {
      * 3. It then checks if the stone is surrounded by opponent's stone by checking if all the four positions orthogonally
      * 4. If it is surrounded, it returns true
      * */
-//    public boolean isCaptured(int row, int column){
-//        //get color
-//        char color = board.getStones(row, column);
-//        char opponentColor = (color == BLACK) ? WHITE : BLACK;
-//        if (color == EMPTY || color != opponentColor) {
-//            return false;
-//        }
-//
-//        //If all four neighboring spots contain the opponent's color, the code returns true. Otherwise, it returns false.
-//        if ((row > 0 && board.getStones(row-1, column) == opponentColor) &&
-//                (row < BOARD_SIZE-1 && board.getStones(row+1, column) == opponentColor) &&
-//                (column > 0 && board.getStones(row, column-1) == opponentColor) &&
-//                (column < BOARD_SIZE-1 && board.getStones(row, column+1) == opponentColor)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 
     public boolean isCaptured(int row, int column) {
+        //base case check to prevent stack overflow
+        if (row < 0 || row >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE) {
+            return false;
+        }
+
         //get color
         char color = board.getStones(row, column);
 
@@ -148,6 +136,13 @@ public class Game {
             return false;
         }
         if (hasLiberties(row, column)) return false;
+        // Check if the current stone has already been visited
+        if (visited[row][column]) {
+            return false;
+        }
+
+        // Mark the current stone as visited
+        visited[row][column] = true;
 
 
         //if no liberties, check neighboring spots recursively
@@ -182,6 +177,7 @@ public class Game {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -208,31 +204,15 @@ public class Game {
     }
 
 
-    //Waar is black omsingeld door wit = groep zwart gecaptured
-    // loop door board
-    // is eigen kleur of leeg -> continue (lijst met eigen kleur of leeg? indexes)
-
-    //-> niet captured
-    //check liberties --> niet caputured
-
-    //Als bovenstaande acties allemaal false zijn --> mogelijkheid tot captured
-    //check alle buren. zodra in van de buren een opponentcolor --> voeg toe aan lijst mogelijkecaptures
-    //roep zelfde functie aan voor alle buren --> als libertie -> break, anders weer toevoegen mogelijke captures
-    //
-
-
-    // of buurman zwart --> niet captured
 
 
     //wat te doen met de randen? return -1? Dit is buiten het board. getstones. check waarde. binnen board? zo niet  -1.
 
 
 
-    public void capture(int row, int column) {
+    public void makeFieldEmptyCapture(int row, int column) {
         //stones captured and removed from the board
-        if (isCaptured(row, column)) {
             board.setStones(row, column, EMPTY);
-        }
     }
 
     //Scoring: The number of captured stones and territory must be accurately calculated at the end of the game.
