@@ -22,15 +22,15 @@ public class GameHandler {
     private int turn;
     private List<String> movesHistory;
     private Game game;
-    private Go go;
+    private Go gogui;
 
     public GameHandler(int boardSize) {
         movesHistory = new ArrayList<>();
-        go = new Go(boardSize);
+        gogui = new Go(boardSize);
     }
 
     public void startGame() {
-        go.testBoard();
+        gogui.gameBoard();
     }
 
     public void startNewGame(Player player1, Player player2, Server server) {
@@ -61,8 +61,9 @@ public class GameHandler {
                 int col = Integer.parseInt(parts[2]);
 
                 // update the board and switch the current player
-//                currentPlayer.determineMove();
+//
                 game.doMove(row-1,col-1, game.getCurrentPlayer().getColor());
+                gogui.placeStoneOnBoard(row-1,col-1, game.getCurrentPlayer().getColor());
                 player1.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
                 player2.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
 //                player1.sendMessageToClient(game.printCurrentBoard());

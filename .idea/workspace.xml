@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/a/4ad32d4aa4a93491e943a5aa30810f2a69769109" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/3/b31520402a93ed8b0df21d09d3e0b9b8bfb8ac28" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/4/b4e31bb9ae829952addfc3434ef9d310551120d9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/gui/GoGuiImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/gui/GoGuiImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Go.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Go.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" afterDir="false" />
     </list>
@@ -69,60 +63,8 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/nedap/go/client" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientTui">
-    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.Client" />
-      <module name="gogame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.nedap.go.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClientTui" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.nedap.go.client.ClientTui" />
-      <module name="gogame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.nedap.go.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GoGuiImpl" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GoGuiImpl" />
-      <module name="gogame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.nedap.go.gui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tui" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.nedap.go.tui.Tui" />
-      <module name="gogame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.nedap.go.tui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameTest.testIsCaptured" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GameTest.testIsNotCapturedExtraStoneLeft">
+    <configuration name="GameTest.testIsNotCapturedExtraStoneLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gogame" />
       <extension name="coverage">
         <pattern>
@@ -132,26 +74,90 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
-      <option name="METHOD_NAME" value="testIsCaptured" />
+      <option name="METHOD_NAME" value="testIsNotCapturedExtraStoneLeft" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testIsNotCapturedExtraStoneRight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gogame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nedap.go.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
+      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
+      <option name="METHOD_NAME" value="testIsNotCapturedExtraStoneRight" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testIsNotCapturedOneMissingStoneBottom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gogame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nedap.go.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
+      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
+      <option name="METHOD_NAME" value="testIsNotCapturedOneMissingStoneBottom" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testIsNotCapturedOneMissingStoneLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gogame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nedap.go.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
+      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
+      <option name="METHOD_NAME" value="testIsNotCapturedOneMissingStoneLeft" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testIsNotCapturedTwoMissingStoneSBottom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gogame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nedap.go.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
+      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
+      <option name="METHOD_NAME" value="testIsNotCapturedTwoMissingStoneSBottom" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.GoGuiImpl" />
-      <item itemvalue="Application.ClientTui" />
-      <item itemvalue="Application.Tui" />
-      <item itemvalue="Application.Client" />
-      <item itemvalue="JUnit.GameTest.testIsCaptured" />
+      <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneLeft" />
+      <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneRight" />
+      <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneBottom" />
+      <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneLeft" />
+      <item itemvalue="JUnit.GameTest.testIsNotCapturedTwoMissingStoneSBottom" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientTui" />
-        <item itemvalue="Application.GoGuiImpl" />
-        <item itemvalue="JUnit.GameTest.testIsCaptured" />
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Tui" />
+        <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneLeft" />
+        <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneRight" />
+        <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneLeft" />
+        <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneBottom" />
+        <item itemvalue="JUnit.GameTest.testIsNotCapturedTwoMissingStoneSBottom" />
       </list>
     </recent_temporary>
   </component>
@@ -169,7 +175,7 @@
       <workItem from="1674635242165" duration="530000" />
       <workItem from="1674636161069" duration="4427000" />
       <workItem from="1675169972702" duration="33842000" />
-      <workItem from="1675258315426" duration="17301000" />
+      <workItem from="1675258315426" duration="29448000" />
     </task>
     <servers />
   </component>
@@ -197,19 +203,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java</url>
-          <line>139</line>
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java</url>
-          <line>144</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="85" />
+          <line>181</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

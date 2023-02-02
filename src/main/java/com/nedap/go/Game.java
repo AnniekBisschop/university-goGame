@@ -11,7 +11,7 @@ import static com.nedap.go.Protocol.*;
 
 /**
  * The game class implements the rules of the Go game
- * */
+ */
 
 public class Game {
 
@@ -20,19 +20,21 @@ public class Game {
     // ArrayList to store previous states of the board
     private static ArrayList<String> boardHistory;
 
-    private  Player player1;
+    private Player player1;
     private Player player2;
     private Player currentPlayer;
     private static int amountPasses = 0;
-    private boolean[][] visited = new boolean[BOARD_SIZE][BOARD_SIZE];
+    private boolean[][] possibleCapture = new boolean[BOARD_SIZE][BOARD_SIZE];
+    private boolean[][] visitedStones = new boolean[BOARD_SIZE][BOARD_SIZE];
 
     /**
      * Constructor name: Game
+     *
      * @param player1 (Player)
      * @param player2 (Player)
      * Inside the function:
      * 1. Creates a new game with 2 players and a board
-     * */
+     */
     public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
@@ -45,47 +47,48 @@ public class Game {
      * Function name: switchPlayer
      * Inside the function:
      * 1. players take turn, alternation of player
-     * */
+     */
     public void switchPlayer() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
         } else {
             currentPlayer = player1;
-        }}
-//TODO: Write more logic to check valid move
+        }
+    }
+
+    //TODO: Write more logic to check valid move
     //TODO write JAVADOC
-    public void doMove(int row, int col, char color){
+    public void doMove(int row, int col, char color) {
         //update the board with move
         if (!isKo(row, col, color)) {
-            board.placeStone(row,col,color);
+            board.placeStone(row, col, color);
             Board copyBoard = board.copyBoard();
             boardHistory.add(board.toString());
             switchPlayer();
+            resetPass();
         } else {
             //TODO: Make communication go through gamehandler
             currentPlayer.sendMessageToClient(INVALIDMOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + "spot taken, not a valid position or ko-rule violated");
 //            currentPlayer.sendMessageToClient(YOURTURN);
         }
-        if(isCaptured(row,col)){
-
-            makeFieldEmptyCapture(row,col);
-            currentPlayer.sendMessageToClient("CAPTURE");
-        }
+//        if (isCaptured(row, col)) {
+//            currentPlayer.sendMessageToClient("CAPTURE");
+//        }
         //TODO if captured
-        //TODO removeStones
-        ///TODO Resetpass too much? PLacestone has resetPass
-        resetPass();
+
+
+
     }
 
     //Ko: A player cannot repeat a board position that has occurred previously in the game.
     // Check if the move would violate the rule of ko
     //TODO: JAVADOC
-   public boolean isKo(int row, int col, char color){
-       Board boardAfterMove = board.copyBoard();
-       boardAfterMove.placeStone(row, col, color);
+    public boolean isKo(int row, int col, char color) {
+        Board boardAfterMove = board.copyBoard();
+        boardAfterMove.placeStone(row, col, color);
 
-       return boardHistory.contains(boardAfterMove.toString());
-   }
+        return boardHistory.contains(boardAfterMove.toString());
+    }
 
     /**
      * Function name: pass
@@ -109,27 +112,32 @@ public class Game {
 
     //A stone or solidly connected group of stones of one color is captured and removed from the board
     // when all the intersections directly orthogonally adjacent to it are occupied by the opponent.
+
     /**
      * Function name: isCaptured
-     * @param row (int)
+     *
+     * @param row    (int)
      * @param column (int)
      * @return boolean
-     *
+     * <p>
      * Inside the function:
      * 1. It checks if the stone is empty or not, if it's empty it returns false.
      * 2. Then it checks the color of the stone and the color of the opponent.
      * 3. It then checks if the stone is surrounded by opponent's stone by checking if all the four positions orthogonally
      * 4. If it is surrounded, it returns true
-     * */
+     */
 
-    public boolean isCaptured(int row, int column) {
+    public boolean isCaptured(int row, int column, char color) {
+
+        resetCaptureLists();
+
         //base case check to prevent stack overflow
         if (row < 0 || row >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE) {
             return false;
         }
 
-        //get color
-        char color = board.getStones(row, column);
+        //keeps track of visited stones
+        visitedStones[row][column] = true;
 
         //empty spot cannot be captured
         if (color == EMPTY) {
@@ -137,12 +145,10 @@ public class Game {
         }
         if (hasLiberties(row, column)) return false;
         // Check if the current stone has already been visited
-        if (visited[row][column]) {
-            return false;
+        if (!possibleCapture[row][column]) {
+            // Mark the current stone as visited
+            possibleCapture[row][column] = true;
         }
-
-        // Mark the current stone as visited
-        visited[row][column] = true;
 
 
         //if no liberties, check neighboring spots recursively
@@ -150,69 +156,94 @@ public class Game {
 
         //checks spot one row above the current spot (row-1) contains a stone of the same color as the current spot.
         // If it does, the function calls isCaptured with the coordinates of that spot as arguments.
-        if (row > 0 && board.getStones(row-1, column) == color) {
-            if (!isCaptured(row-1, column)) {
-               // returns false. This is because if a neighboring spot contains a stone of the same color
+        if (row > 0 && board.getStones(row - 1, column) == color && visitedStones[row - 1][column] == false) {
+            if (!isCaptured(row - 1, column, color)) {
+                // returns false. This is because if a neighboring spot contains a stone of the same color
                 return false;
             }
         }
 
         //This checks if the spot one row below the current spot (row+1) contains a stone of the same color as the current spot.
-        if (row < BOARD_SIZE-1 && board.getStones(row+1, column) == color) {
-            if (!isCaptured(row+1, column)) {
+        if (row < BOARD_SIZE - 1 && board.getStones(row + 1, column) == color && visitedStones[row + 1][column] == false) {
+            if (!isCaptured(row + 1, column, color)) {
                 return false;
             }
         }
 
         //spot one column to the left of the current spot (column-1) contains a stone of the same color as the current spot.
-        if (column > 0 && board.getStones(row, column-1) == color) {
-            if (!isCaptured(row, column-1)) {
+        if (column > 0 && board.getStones(row, column - 1) == color && visitedStones[row][column - 1] == false) {
+            if (!isCaptured(row, column - 1, color)) {
                 return false;
             }
         }
 
         //spot one column to the right of the current spot (column-1) contains a stone of the same color as the current spot.
-        if (column < BOARD_SIZE-1 && board.getStones(row, column+1) == color) {
-            if (!isCaptured(row, column+1)) {
+        if (column < BOARD_SIZE - 1 && board.getStones(row, column + 1) == color && visitedStones[row][column + 1] == false) {
+            if (!isCaptured(row, column + 1, color)) {
                 return false;
             }
         }
 
-        return true;
+        return possibleCapture[row][column];
     }
 
+    //zet -> loop door board
+    // zijn er omsloten groepjes van opponent color?
+    //domove check of tegenstander kleur gevangen kan worden
+    //TODO: test this
+    public int captureOpponentStones(char ownColor) {
+        int numberOfCaptures = 0;
+
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int column = 0; column < BOARD_SIZE; column++) {
+                char color = board.getStones(row, column);
+                if (color != ownColor) {
+                    isCaptured(row, column, color);
+                    makeFieldEmptyCapture(row, column);
+                    numberOfCaptures++;
+                }
+            }
+        }
+        return numberOfCaptures;
+    }
+
+    public void resetCaptureLists(){
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                visitedStones[i][j] = false;
+                possibleCapture[i][j] = false;
+            }
+        }
+    }
     //check if the group has liberties
     private boolean hasLiberties(int row, int column) {
         //checks if the spot one row above the current spot (row-1) is empty
-        if (row > 0 && board.getStones(row -1, column) == EMPTY) {
+        if (row > 0 && board.getStones(row - 1, column) == EMPTY) {
             return true;
         }
         //checks if the spot one row below the current spot (row+1) is empty
-        if (row < BOARD_SIZE-1 && board.getStones(row +1, column) == EMPTY) {
+        if (row < BOARD_SIZE - 1 && board.getStones(row + 1, column) == EMPTY) {
             return true;
         }
 
         //checks if the spot one column to the left of the current spot (column-1) is empty.
-        if (column > 0 && board.getStones(row, column -1) == EMPTY) {
+        if (column > 0 && board.getStones(row, column - 1) == EMPTY) {
             return true;
         }
         //checks if the spot one column to the right of the current spot (column-1) is empty.
-        if (column < BOARD_SIZE-1 && board.getStones(row, column +1) == EMPTY) {
+        if (column < BOARD_SIZE - 1 && board.getStones(row, column + 1) == EMPTY) {
             return true;
         }
         return false;
     }
 
 
-
-
     //wat te doen met de randen? return -1? Dit is buiten het board. getstones. check waarde. binnen board? zo niet  -1.
-
 
 
     public void makeFieldEmptyCapture(int row, int column) {
         //stones captured and removed from the board
-            board.setStones(row, column, EMPTY);
+        board.setStones(row, column, EMPTY);
     }
 
     //Scoring: territory must be accurately calculated at the end of the game.
@@ -222,7 +253,7 @@ public class Game {
     public boolean isGameOver() {
         if (amountPasses == 2) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -242,7 +273,7 @@ public class Game {
         // Continue the game logic
     }
 
-    public void getWinner(){
+    public void getWinner() {
 
     }
 
