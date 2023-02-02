@@ -5,13 +5,14 @@ import com.nedap.go.client.Player;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.*;
 
 import static com.nedap.go.Protocol.*;
-import static com.nedap.go.board.Board.BLACK;
-import static com.nedap.go.board.Board.WHITE;
+import static com.nedap.go.board.Board.*;
 import static java.lang.System.out;
 
 public class Server implements Runnable {
@@ -27,8 +28,10 @@ public class Server implements Runnable {
     // variable to keep track of number of games started
     private int numGamesStarted;
     private HashMap<Player, GameHandler> gameHandlers;
+    private final InetAddress address;
 
-    public Server(int port) {
+    public Server(int port, InetAddress address) {
+        this.address = address;
         this.port = port;
         clientHandlers = new ArrayList<>();
         waitingPlayers = new LinkedList<>();
@@ -95,7 +98,8 @@ public class Server implements Runnable {
             // Assign player2 color
             player2.setColor(WHITE);
 
-            GameHandler newGameHandler = new GameHandler();
+
+            GameHandler newGameHandler = new GameHandler(BOARD_SIZE);
             newGameHandler.startNewGame(player1, player2, this);
             player1.setGameHandler(newGameHandler);
             player2.setGameHandler(newGameHandler);
@@ -120,8 +124,9 @@ public class Server implements Runnable {
 //            throw new RuntimeException(e);
 //        }
 //    }
-    public static void main(String[] args) {
-        Server server = new Server(910);
+    public static void main(String[] args) throws UnknownHostException {
+//        Server server = new Server(910, InetAddress.getLocalHost());
+        Server server = new Server(910, InetAddress.getByName("192.168.8.100"));
         Thread thread = new Thread(server);
         thread.start();
 

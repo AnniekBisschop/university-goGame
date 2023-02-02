@@ -6,9 +6,14 @@
 * Clone (with Git) or download this project to your PC
 * Use Maven to build the project (or use your IDE)
 * Run the application using the commandline or IDE
+* You can use the packages in src/main/java/com.nedap.go directory to play the game
+* Use the server package for the server and the client package for the client
 * Start the Server in the server package so it can start listening for connections
 * At the moment it listens at port 910 but you can change that if you wish
 * Now you can start the ClientTui. Enter a server address and port first
+
+## Setup game
+* You can adjust the size of the board in the board class by adjusting the BOARD_SIZE. It is now setup for a 9*9
 
 
 ## Instructions and commands

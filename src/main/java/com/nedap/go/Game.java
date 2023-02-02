@@ -215,7 +215,8 @@ public class Game {
             board.setStones(row, column, EMPTY);
     }
 
-    //Scoring: The number of captured stones and territory must be accurately calculated at the end of the game.
+    //Scoring: territory must be accurately calculated at the end of the game.
+
 
     //End of Game: The game ends when both players pass consecutively.
     public boolean isGameOver() {
@@ -225,6 +226,7 @@ public class Game {
             return false;
         }
     }
+
 
     public Player getCurrentPlayer() {
         return currentPlayer;

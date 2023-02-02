@@ -40,28 +40,31 @@ public class GameTest {
 
     @Test
     public void testIsCaptured() {
-//        board.setStones(3, 4, BLACK);
-//        board.setStones(3, 3, WHITE);
-//        board.setStones(3, 5, WHITE);
-//        board.setStones(2, 4, WHITE);
-//        board.setStones(4, 4, WHITE);
-//        System.out.println(board.printBoard());
-//        System.out.println("get stones: " + board.getStones(3,4));
-//        assertTrue(game.isCaptured(3, 4));
-
-
         board.setStones(3, 4, BLACK);
         board.setStones(3, 3, WHITE);
-        board.setStones(3, 5, BLACK);
-        board.setStones(2, 5, WHITE);
+        board.setStones(3, 5, WHITE);
         board.setStones(2, 4, WHITE);
         board.setStones(4, 4, WHITE);
-        board.setStones(4,5,WHITE);
-        board.setStones(3,6,WHITE);
         System.out.println(board.printBoard());
+        System.out.println("get stones: " + board.getStones(3,4));
+        assertTrue(game.isCaptured(3, 4));
 
-        game.makeFieldEmptyCapture(3,4);
-        game.makeFieldEmptyCapture(3,5);
+//
+//        board.setStones(3, 4, BLACK);
+//        board.setStones(3, 3, WHITE);
+//        board.setStones(3, 5, BLACK);
+//        board.setStones(2, 5, WHITE);
+//        board.setStones(2, 4, WHITE);
+//        board.setStones(4, 4, WHITE);
+//        board.setStones(4,5,WHITE);
+//        board.setStones(3,6,WHITE);
+//        System.out.println(board.printBoard());
+//
+//        assertTrue(game.isCaptured(3, 4));
+//        assertTrue(game.isCaptured(3, 5));
+//
+//        game.makeFieldEmptyCapture(3,4);
+//        game.makeFieldEmptyCapture(3,5);
 
         System.out.println(board.printBoard());
         // test capturing an empty stone

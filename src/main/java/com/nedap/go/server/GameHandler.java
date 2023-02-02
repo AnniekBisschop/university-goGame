@@ -1,6 +1,7 @@
 package com.nedap.go.server;
 
 import com.nedap.go.Game;
+import com.nedap.go.Go;
 import com.nedap.go.board.Board;
 import com.nedap.go.client.Client;
 import com.nedap.go.client.Player;
@@ -21,23 +22,30 @@ public class GameHandler {
     private int turn;
     private List<String> movesHistory;
     private Game game;
+    private Go go;
 
-    public GameHandler() {
+    public GameHandler(int boardSize) {
         movesHistory = new ArrayList<>();
+        go = new Go(boardSize);
+    }
+
+    public void startGame() {
+        go.testBoard();
     }
 
     public void startNewGame(Player player1, Player player2, Server server) {
         this.player1 = player1;
         this.player2 = player2;
         game = new Game(player1,player2);
+        startGame();
         currentPlayer = game.getCurrentPlayer();
         // Send message to players to let them know the game has started
         player1.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
         player2.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
         // Notify the player who can make the first move
         player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
-        player1.sendMessageToClient(game.printCurrentBoard());
-        player2.sendMessageToClient(game.printCurrentBoard());
+//        player1.sendMessageToClient(game.printCurrentBoard());
+//        player2.sendMessageToClient(game.printCurrentBoard());
     }
 
 
@@ -57,8 +65,8 @@ public class GameHandler {
                 game.doMove(row-1,col-1, game.getCurrentPlayer().getColor());
                 player1.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
                 player2.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
-                player1.sendMessageToClient(game.printCurrentBoard());
-                player2.sendMessageToClient(game.printCurrentBoard());
+//                player1.sendMessageToClient(game.printCurrentBoard());
+//                player2.sendMessageToClient(game.printCurrentBoard());
                 currentPlayer = game.getCurrentPlayer();
                 game.getCurrentPlayer().sendMessageToClient(YOURTURN + SEPARATOR + currentPlayer.getUsername());
 
