@@ -65,12 +65,13 @@ public class Game {
         //update the board with move
         if (!isKo(row, col, color)) {
             board.placeStone(row, col, color);
+            if (isCaptured(row, col, color)) {
+                captureOpponentStones(currentPlayer.getColor());
+            }
             Board copyBoard = board.copyBoard();
             boardHistory.add(board.toString());
-            if (isCaptured(row, col, getOpponentColor(currentPlayer.getColor()))) {
-                captureOpponentStones(currentPlayer.getColor());
-                currentPlayer.sendMessageToClient("CAPTURE");
-            }
+
+
             switchPlayer();
             resetPass();
         } else {

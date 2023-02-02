@@ -6,6 +6,7 @@ import com.nedap.go.client.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import static com.nedap.go.board.Board.*;
@@ -249,5 +250,39 @@ public class GameTest {
         System.out.println(board.printBoard());
 
         assertEquals(3, game.captureOpponentStones(WHITE));
+    }
+
+    @Test
+    public void testCaptureOpponentStones() {
+
+        board.setStones(2, 4, BLACK);
+        board.setStones(2, 5, BLACK);
+        board.setStones(3, 4, BLACK);
+        board.setStones(3, 5, BLACK);
+        board.setStones(4, 4, WHITE);
+        board.setStones(4, 5, WHITE);
+        board.setStones(3, 6, WHITE);
+        board.setStones(3, 3, WHITE);
+        board.setStones(2, 3, WHITE);
+        board.setStones(1, 4, WHITE);
+        board.setStones(1, 5, WHITE);
+        board.setStones(2, 6, WHITE);
+        System.out.println(board.printBoard());
+
+        int expectedNumberOfCaptures = 4;
+        int numberOfCaptures = game.captureOpponentStones(WHITE);
+        assertEquals(expectedNumberOfCaptures, numberOfCaptures);
+
+    }
+
+    @Test
+    public void testCapturedStonesRemovedFromBoard(){
+        ArrayList<Point2D> capturedStones = new ArrayList<>();
+        for (Point2D capturedStone: capturedStones) {
+            int row = (int)capturedStone.getX();
+            int column = (int)capturedStone.getY();
+            char color = board.getStones(row, column);
+            assertEquals(EMPTY, color);
+        }
     }
 }
