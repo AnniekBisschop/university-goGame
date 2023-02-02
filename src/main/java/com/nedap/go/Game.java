@@ -209,7 +209,6 @@ public class Game {
                 }
             }
         }
-
         for (Point2D capturedStone: capturedStones) {
             makeFieldEmptyCapture((int)capturedStone.getX(), (int)capturedStone.getY());
         }

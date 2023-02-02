@@ -7,6 +7,8 @@
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/nedap/go/gui/GameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/nedap/go/gui/GameTest.class" afterDir="false" />
@@ -62,7 +64,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/nedap/go/client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest.testCaptureOpponentStones">
+  <component name="RunManager" selected="JUnit.GameTest.testCapturedStonesRemovedFromBoard">
     <configuration name="GameTest.testCaptureOpponentStones" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gogame" />
       <extension name="coverage">
@@ -152,8 +154,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameTest.testCaptureOpponentStones" />
         <item itemvalue="JUnit.GameTest.testCapturedStonesRemovedFromBoard" />
+        <item itemvalue="JUnit.GameTest.testCaptureOpponentStones" />
         <item itemvalue="JUnit.GameTest.testCapturedOpponentStonesCornerGroup" />
         <item itemvalue="JUnit.GameTest.testIsCapturedCornerGroup" />
         <item itemvalue="JUnit.GameTest.testIsCapturedBigGroup" />
@@ -174,7 +176,7 @@
       <workItem from="1674635242165" duration="530000" />
       <workItem from="1674636161069" duration="4427000" />
       <workItem from="1675169972702" duration="33842000" />
-      <workItem from="1675258315426" duration="42971000" />
+      <workItem from="1675258315426" duration="44582000" />
     </task>
     <servers />
   </component>
@@ -203,11 +205,6 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
-          <line>193</line>
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
           <line>132</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
@@ -218,22 +215,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
-          <line>192</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
           <line>149</line>
           <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
-          <line>197</line>
-          <properties class="com.nedap.go.gui.GameTest" method="testIsCapturedBigGroup">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="103" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

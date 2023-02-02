@@ -37,31 +37,13 @@ public class Client implements Runnable {
             try {
                 String message = in.readLine();
                 if(message == null) continue;
-                sendMessage(message);
-//                String[] parts = message.split(SEPARATOR);
-//                String command = parts[0];
-//                switch (command) {
-//                    case HELLO:
-//                        sendMessage(HELLO);
-//                        break;
-//                    case USERNAME:
-//                        sendUsernameToServer(parts[1]);
-//                        break;
-//                    case QUEUE:
-//                        sendMessage(QUEUE);
-//                        break;
-//                    case MOVE:
-//                        move(parts[1], parts[2]);
-//                        break;
-//                    case PASS:
-//                        sendMessage(PASS);
-//                        break;
-//                    case QUIT:
-//                        sendMessage(QUIT);
-//                        break;
-//                    default:
-//                        break;
 
+                if(message.equals(QUIT)){
+                    sendMessage(message);
+                    close();
+                }else {
+                    sendMessage(message);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,7 +75,7 @@ public class Client implements Runnable {
             }
             System.out.println(message);
         } catch (IOException e) {
-            System.out.println("oops");
+            System.out.println("Disconnected from server");
            close();
         }
     }
@@ -148,7 +130,5 @@ public class Client implements Runnable {
             }
         }
     }
-
-
 }
 

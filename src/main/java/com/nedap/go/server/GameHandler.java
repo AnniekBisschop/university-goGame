@@ -59,7 +59,6 @@ public class GameHandler {
                 int col = Integer.parseInt(parts[2]);
 
                 // update the board and switch the current player
-//
                 game.doMove(row-1,col-1, game.getCurrentPlayer().getColor());
                 gogui.placeStoneOnBoard(col-1,row-1, game.getCurrentPlayer().getColor());
                 player1.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
@@ -103,37 +102,11 @@ public class GameHandler {
                 break;
         }
     }
-
-
-
-
-
 }
 
 
 
 
-//    public void validateMove(String move) {
-//        // Validate move here
-//        if(game.doMove(3,4,BLACK);){
-//
-//            doMove(player, move);
-//        }else{
-//            player.sendMessageToClient("Invalid move. Please try again.");
-//        }
-//    }
-
-//    private void doMove(ClientHandler player, int move) {
-//        // Update game state based on move
-//        game.doMove(move);
-//        movesHistory.add(move);
-//        // Send message to other player to let them know the move
-//        if (player == player1) {
-//            player2.sendMessageToClient("Player 1 made a move: " + move);
-//        } else {
-//            player1.sendMessageToClient("Player 2 made a move: " + move);
-//        }
-//    }
 
 
 

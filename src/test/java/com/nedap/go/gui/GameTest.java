@@ -272,17 +272,18 @@ public class GameTest {
         int expectedNumberOfCaptures = 4;
         int numberOfCaptures = game.captureOpponentStones(WHITE);
         assertEquals(expectedNumberOfCaptures, numberOfCaptures);
-
     }
-
     @Test
     public void testCapturedStonesRemovedFromBoard(){
         ArrayList<Point2D> capturedStones = new ArrayList<>();
+        capturedStones.add(new Point2D.Double(2, 4));
+        capturedStones.add(new Point2D.Double(4, 4));
+        capturedStones.add(new Point2D.Double(2, 6));
+        capturedStones.add(new Point2D.Double(3, 4));
+
         for (Point2D capturedStone: capturedStones) {
-            int row = (int)capturedStone.getX();
-            int column = (int)capturedStone.getY();
-            char color = board.getStones(row, column);
-            assertEquals(EMPTY, color);
+            game.makeFieldEmptyCapture((int)capturedStone.getX(), (int)capturedStone.getY());
         }
+        System.out.println(board.printBoard());
     }
 }
