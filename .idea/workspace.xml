@@ -7,8 +7,6 @@
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Go.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Go.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" afterDir="false" />
     </list>
@@ -63,8 +61,8 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/nedap/go/client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest.testIsNotCapturedExtraStoneLeft">
-    <configuration name="GameTest.testIsNotCapturedExtraStoneLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GameTest.testCapturedOpponentStonesCornerGroup">
+    <configuration name="GameTest.testCapturedOpponentStonesCornerGroup" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gogame" />
       <extension name="coverage">
         <pattern>
@@ -74,13 +72,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
-      <option name="METHOD_NAME" value="testIsNotCapturedExtraStoneLeft" />
+      <option name="METHOD_NAME" value="testCapturedOpponentStonesCornerGroup" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testIsNotCapturedExtraStoneRight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameTest.testIsCapturedBigGroup" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gogame" />
       <extension name="coverage">
         <pattern>
@@ -90,13 +88,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
-      <option name="METHOD_NAME" value="testIsNotCapturedExtraStoneRight" />
+      <option name="METHOD_NAME" value="testIsCapturedBigGroup" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testIsNotCapturedOneMissingStoneBottom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameTest.testIsCapturedCornerGroup" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gogame" />
       <extension name="coverage">
         <pattern>
@@ -106,7 +104,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
       <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
-      <option name="METHOD_NAME" value="testIsNotCapturedOneMissingStoneBottom" />
+      <option name="METHOD_NAME" value="testIsCapturedCornerGroup" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testIsCapturedCornerTwoStones" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gogame" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.nedap.go.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
+      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
+      <option name="METHOD_NAME" value="testIsCapturedCornerTwoStones" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -128,36 +142,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameTest.testIsNotCapturedTwoMissingStoneSBottom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gogame" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.nedap.go.gui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.nedap.go.gui" />
-      <option name="MAIN_CLASS_NAME" value="com.nedap.go.gui.GameTest" />
-      <option name="METHOD_NAME" value="testIsNotCapturedTwoMissingStoneSBottom" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneLeft" />
-      <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneRight" />
-      <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneBottom" />
+      <item itemvalue="JUnit.GameTest.testCapturedOpponentStonesCornerGroup" />
+      <item itemvalue="JUnit.GameTest.testIsCapturedBigGroup" />
+      <item itemvalue="JUnit.GameTest.testIsCapturedCornerGroup" />
+      <item itemvalue="JUnit.GameTest.testIsCapturedCornerTwoStones" />
       <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneLeft" />
-      <item itemvalue="JUnit.GameTest.testIsNotCapturedTwoMissingStoneSBottom" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneLeft" />
-        <item itemvalue="JUnit.GameTest.testIsNotCapturedExtraStoneRight" />
+        <item itemvalue="JUnit.GameTest.testCapturedOpponentStonesCornerGroup" />
+        <item itemvalue="JUnit.GameTest.testIsCapturedCornerGroup" />
+        <item itemvalue="JUnit.GameTest.testIsCapturedBigGroup" />
+        <item itemvalue="JUnit.GameTest.testIsCapturedCornerTwoStones" />
         <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneLeft" />
-        <item itemvalue="JUnit.GameTest.testIsNotCapturedOneMissingStoneBottom" />
-        <item itemvalue="JUnit.GameTest.testIsNotCapturedTwoMissingStoneSBottom" />
       </list>
     </recent_temporary>
   </component>
@@ -175,7 +173,7 @@
       <workItem from="1674635242165" duration="530000" />
       <workItem from="1674636161069" duration="4427000" />
       <workItem from="1675169972702" duration="33842000" />
-      <workItem from="1675258315426" duration="29448000" />
+      <workItem from="1675258315426" duration="37442000" />
     </task>
     <servers />
   </component>
@@ -204,11 +202,50 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
-          <line>181</line>
-          <option name="timeStamp" value="86" />
+          <line>192</line>
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
+          <line>131</line>
+          <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
+          <line>191</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
+          <line>148</line>
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
+          <line>250</line>
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
+          <line>196</line>
+          <properties class="com.nedap.go.gui.GameTest" method="testIsCapturedBigGroup">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="103" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="visitedStones[row + 1]" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

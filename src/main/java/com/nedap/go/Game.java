@@ -2,9 +2,12 @@ package com.nedap.go;
 
 import com.nedap.go.board.Board;
 import com.nedap.go.client.Player;
+import com.nedap.go.server.ClientHandler;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.nedap.go.board.Board.*;
 import static com.nedap.go.Protocol.*;
@@ -128,11 +131,14 @@ public class Game {
      */
 
     public boolean isCaptured(int row, int column, char color) {
-
         resetCaptureLists();
+        return isCapturedAlgorithm(row, column, color);
+    }
+
+    public boolean isCapturedAlgorithm(int row, int column, char color) {
 
         //base case check to prevent stack overflow
-        if (row < 0 || row >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE) {
+        if (isOutOfBounds(row, column)) {
             return false;
         }
 
@@ -143,7 +149,11 @@ public class Game {
         if (color == EMPTY) {
             return false;
         }
-        if (hasLiberties(row, column)) return false;
+
+        //if no liberties, check neighboring spots recursively
+        if (hasLiberties(row, column)) {
+            return false;
+        }
         // Check if the current stone has already been visited
         if (!possibleCapture[row][column]) {
             // Mark the current stone as visited
@@ -151,63 +161,77 @@ public class Game {
         }
 
 
-        //if no liberties, check neighboring spots recursively
-
-
         //checks spot one row above the current spot (row-1) contains a stone of the same color as the current spot.
         // If it does, the function calls isCaptured with the coordinates of that spot as arguments.
-        if (row > 0 && board.getStones(row - 1, column) == color && visitedStones[row - 1][column] == false) {
-            if (!isCaptured(row - 1, column, color)) {
+        if (!isOutOfBounds(row - 1, column) && (board.getStones(row - 1, column) == color) && visitedStones[row - 1][column] == false) {
+            if (!isCapturedAlgorithm(row - 1, column, color)) {
                 // returns false. This is because if a neighboring spot contains a stone of the same color
                 return false;
             }
         }
 
         //This checks if the spot one row below the current spot (row+1) contains a stone of the same color as the current spot.
-        if (row < BOARD_SIZE - 1 && board.getStones(row + 1, column) == color && visitedStones[row + 1][column] == false) {
-            if (!isCaptured(row + 1, column, color)) {
+        if (!isOutOfBounds(row + 1, column) && board.getStones(row + 1, column) == color && visitedStones[row + 1][column] == false) {
+            if (!isCapturedAlgorithm(row + 1, column, color)) {
                 return false;
             }
         }
 
         //spot one column to the left of the current spot (column-1) contains a stone of the same color as the current spot.
-        if (column > 0 && board.getStones(row, column - 1) == color && visitedStones[row][column - 1] == false) {
-            if (!isCaptured(row, column - 1, color)) {
+        if (!isOutOfBounds(row, column - 1) && board.getStones(row, column - 1) == color && visitedStones[row][column - 1] == false) {
+            if (!isCapturedAlgorithm(row, column - 1, color)) {
                 return false;
             }
         }
 
-        //spot one column to the right of the current spot (column-1) contains a stone of the same color as the current spot.
-        if (column < BOARD_SIZE - 1 && board.getStones(row, column + 1) == color && visitedStones[row][column + 1] == false) {
-            if (!isCaptured(row, column + 1, color)) {
+        //spot one column to the right of the current spot (column + 1) contains a stone of the same color as the current spot.
+        if (!isOutOfBounds(row, column + 1) && board.getStones(row, column + 1) == color && visitedStones[row][column + 1] == false) {
+            if (!isCapturedAlgorithm(row, column + 1, color)) {
                 return false;
             }
         }
 
-        return possibleCapture[row][column];
+        boolean isCaptured = possibleCapture[row][column];
+        return isCaptured;
     }
+
+    /*
+    * Check for the edge: When checking the neighboring stones, if any of the indices (row or column) is outside the bounds of the board,
+    * then it means the group of stones is surrounded by the edge. In that case, return true (as the group is captured).*/
+
 
     //zet -> loop door board
     // zijn er omsloten groepjes van opponent color?
     //domove check of tegenstander kleur gevangen kan worden
     //TODO: test this
     public int captureOpponentStones(char ownColor) {
+        ArrayList<Point2D> capturedStones = new ArrayList<>();
         int numberOfCaptures = 0;
 
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int column = 0; column < BOARD_SIZE; column++) {
                 char color = board.getStones(row, column);
                 if (color != ownColor) {
-                    isCaptured(row, column, color);
-                    makeFieldEmptyCapture(row, column);
-                    numberOfCaptures++;
+                    if (isCaptured(row, column, color)) {
+                        capturedStones.add(new Point2D.Double(row, column));
+                        numberOfCaptures++;
+                    }
                 }
             }
         }
+
+        for (Point2D capturedStone: capturedStones) {
+            makeFieldEmptyCapture((int)capturedStone.getX(), (int)capturedStone.getY());
+        }
+
         return numberOfCaptures;
     }
 
-    public void resetCaptureLists(){
+    private boolean isOutOfBounds(int row, int column) {
+        return row < 0 || row >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE;
+    }
+
+    private void resetCaptureLists(){
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 visitedStones[i][j] = false;
