@@ -44,8 +44,6 @@ public class GameHandler {
         player2.sendMessageToClient(NEWGAME + SEPARATOR + player1.getUsername() + SEPARATOR + player2.getUsername());
         // Notify the player who can make the first move
         player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
-//        player1.sendMessageToClient(game.printCurrentBoard());
-//        player2.sendMessageToClient(game.printCurrentBoard());
     }
 
 
@@ -63,11 +61,9 @@ public class GameHandler {
                 // update the board and switch the current player
 //
                 game.doMove(row-1,col-1, game.getCurrentPlayer().getColor());
-                gogui.placeStoneOnBoard(row-1,col-1, game.getCurrentPlayer().getColor());
+                gogui.placeStoneOnBoard(col-1,row-1, game.getCurrentPlayer().getColor());
                 player1.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
                 player2.sendMessageToClient(MOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + row + SEPARATOR + col);
-//                player1.sendMessageToClient(game.printCurrentBoard());
-//                player2.sendMessageToClient(game.printCurrentBoard());
                 currentPlayer = game.getCurrentPlayer();
                 game.getCurrentPlayer().sendMessageToClient(YOURTURN + SEPARATOR + currentPlayer.getUsername());
 
@@ -81,10 +77,12 @@ public class GameHandler {
                 }else {
                         if (currentPlayer == player1) {
                             currentPlayer = player2;
-                            player2.sendMessageToClient(PASS+ " by " + player1.getUsername() + SEPARATOR + YOURTURN + SEPARATOR + player2.getUsername());
+                            player2.sendMessageToClient(MOVE + SEPARATOR + player1.getUsername() + PASS);
+                            player2.sendMessageToClient(YOURTURN + SEPARATOR + player2.getUsername());
                         } else {
                             currentPlayer = player1;
-                            player1.sendMessageToClient(PASS+ " by " + player2.getUsername() + YOURTURN + SEPARATOR + player1.getUsername());
+                            player1.sendMessageToClient(MOVE+ SEPARATOR+ player2.getUsername()+ PASS);
+                            player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
                         }
                     break;
                 }

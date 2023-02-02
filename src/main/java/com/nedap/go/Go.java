@@ -95,11 +95,11 @@ public class Go {
 //		gogui.addHintIndicator(4, 4);
 	}
 
-	public void placeStoneOnBoard(int row, int column, char color){
+	public void placeStoneOnBoard(int column, int row, char color){
 		if(color == WHITE){
-			gogui.addStone(row, column,true);
+			gogui.addStone(column, row,false);
 		}else{
-			gogui.addStone(row, column,false);
+			gogui.addStone(column, row,true);
 		}
 	}
 

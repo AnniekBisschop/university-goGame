@@ -7,7 +7,8 @@
     <list default="true" id="a0512c86-694c-4771-a1c0-fa15034cb5ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/Go.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/Go.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nedap/go/server/GameHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/nedap/go/Game.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +62,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/nedap/go/client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameTest.testCapturedOpponentStonesCornerGroup">
+  <component name="RunManager">
     <configuration name="GameTest.testCapturedOpponentStonesCornerGroup" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gogame" />
       <extension name="coverage">
@@ -173,7 +174,7 @@
       <workItem from="1674635242165" duration="530000" />
       <workItem from="1674636161069" duration="4427000" />
       <workItem from="1675169972702" duration="33842000" />
-      <workItem from="1675258315426" duration="37442000" />
+      <workItem from="1675258315426" duration="40528000" />
     </task>
     <servers />
   </component>
@@ -224,11 +225,6 @@
           <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
           <line>148</line>
           <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>
-          <line>250</line>
-          <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/nedap/go/gui/GameTest.java</url>

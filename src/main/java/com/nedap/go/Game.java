@@ -67,19 +67,16 @@ public class Game {
             board.placeStone(row, col, color);
             Board copyBoard = board.copyBoard();
             boardHistory.add(board.toString());
+            if (isCaptured(row, col, getOpponentColor(currentPlayer.getColor()))) {
+                captureOpponentStones(currentPlayer.getColor());
+                currentPlayer.sendMessageToClient("CAPTURE");
+            }
             switchPlayer();
             resetPass();
         } else {
             //TODO: Make communication go through gamehandler
             currentPlayer.sendMessageToClient(INVALIDMOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + "spot taken, not a valid position or ko-rule violated");
-//            currentPlayer.sendMessageToClient(YOURTURN);
         }
-//        if (isCaptured(row, col)) {
-//            currentPlayer.sendMessageToClient("CAPTURE");
-//        }
-        //TODO if captured
-
-
 
     }
 
@@ -195,14 +192,6 @@ public class Game {
         return isCaptured;
     }
 
-    /*
-    * Check for the edge: When checking the neighboring stones, if any of the indices (row or column) is outside the bounds of the board,
-    * then it means the group of stones is surrounded by the edge. In that case, return true (as the group is captured).*/
-
-
-    //zet -> loop door board
-    // zijn er omsloten groepjes van opponent color?
-    //domove check of tegenstander kleur gevangen kan worden
     //TODO: test this
     public int captureOpponentStones(char ownColor) {
         ArrayList<Point2D> capturedStones = new ArrayList<>();
@@ -262,9 +251,6 @@ public class Game {
     }
 
 
-    //wat te doen met de randen? return -1? Dit is buiten het board. getstones. check waarde. binnen board? zo niet  -1.
-
-
     public void makeFieldEmptyCapture(int row, int column) {
         //stones captured and removed from the board
         board.setStones(row, column, EMPTY);
@@ -290,7 +276,24 @@ public class Game {
     public static int getAmountPasses() {
         return amountPasses;
     }
-
+    /**
+     * Function name: getOpponentColor
+     *
+     * @param color (char)
+     * @return char
+     *
+     * Inside the function:
+     * 1. Returns the opponent's color based on the input color
+     */
+    public char getOpponentColor(char color) {
+        if (color == BLACK) {
+            return WHITE;
+        } else if (color == WHITE) {
+            return BLACK;
+        } else {
+            return EMPTY;
+        }
+    }
     public String printCurrentBoard() {
         // Play the game here
         return board.printBoard();
