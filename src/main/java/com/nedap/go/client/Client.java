@@ -1,5 +1,7 @@
 package com.nedap.go.client;
 
+import com.nedap.go.Go;
+
 import java.io.*;
 import java.net.*;
 
@@ -121,7 +123,6 @@ public class Client implements Runnable {
             e.printStackTrace();
         }
     }
-
     private class MessageListener implements Runnable {
         @Override
         public void run() {

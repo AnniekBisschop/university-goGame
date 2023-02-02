@@ -46,9 +46,6 @@ public class GameHandler {
         player1.sendMessageToClient(YOURTURN + SEPARATOR + player1.getUsername());
     }
 
-
-
-
         public synchronized void processInput(String input) {
             String[] parts = input.split(SEPARATOR);
             String command = parts[0];
@@ -89,10 +86,10 @@ public class GameHandler {
             case QUIT:
                 // player quits the game
                 if (currentPlayer == player1) {
-                    player1.sendMessageToClient("You have quit the game, player2 wins");
+                    player1.sendMessageToClient("You have quit the game, " + player2.getUsername() + " wins");
                     player2.sendMessageToClient(player1.getUsername() +" quit the game, you win");
                 } else {
-                    player2.sendMessageToClient("You have quit the game, player1 wins");
+                    player2.sendMessageToClient("You have quit the game, " + player1.getUsername() + " wins");
                     player1.sendMessageToClient(player2.getUsername() +" quit the game, you win");
                 }
                 break;

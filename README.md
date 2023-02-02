@@ -33,10 +33,10 @@
 
 
 ## Rules
-* Ko rules, and captured stones rules are handled. 
+* Ko rules and captured stones rules are handled. 
 * The game ends when there are two consecutive pass moves.
 * When a player types QUIT the other player wins automatically
 
-## Score calculation
+
 
 

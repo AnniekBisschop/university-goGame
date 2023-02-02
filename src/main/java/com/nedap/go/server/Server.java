@@ -62,9 +62,6 @@ public class Server implements Runnable {
                 for (ClientHandler clientHandler : clientHandlers) {
                     clientHandler.close();
                 }
-                for (GameHandler gameHandler : activeGameHandlers) {
-//                    gameHandler.close();
-                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

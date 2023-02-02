@@ -75,7 +75,6 @@ public class Game {
             switchPlayer();
             resetPass();
         } else {
-            //TODO: Make communication go through gamehandler
             currentPlayer.sendMessageToClient(INVALIDMOVE + SEPARATOR + currentPlayer.getUsername() + SEPARATOR + "spot taken, not a valid position or ko-rule violated");
         }
 
@@ -119,6 +118,7 @@ public class Game {
      *
      * @param row    (int)
      * @param column (int)
+     * @param color (char)
      * @return boolean
      * <p>
      * Inside the function:
@@ -193,7 +193,6 @@ public class Game {
         return isCaptured;
     }
 
-    //TODO: test this
     public int captureOpponentStones(char ownColor) {
         ArrayList<Point2D> capturedStones = new ArrayList<>();
         int numberOfCaptures = 0;
@@ -260,13 +259,12 @@ public class Game {
 
 
     //End of Game: The game ends when both players pass consecutively.
-    public boolean isGameOver() {
-        if (amountPasses == 2) {
-            return true;
-        } else {
-            return false;
+
+        public boolean isGameOver() {
+            return amountPasses == 2 || isBoardFull(board.getBoardRepresentation());
         }
-    }
+
+
 
 
     public Player getCurrentPlayer() {

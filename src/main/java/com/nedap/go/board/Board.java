@@ -23,23 +23,6 @@ public class Board {
      * Inside the function:
      * 1. Prints the board with labels on x and y axes (1-BOARD_SIZE)
      */
-//    public void printBoard() {
-//        // Print the column labels
-//        System.out.print(" ");
-//        for (int column = 0; column < BOARD_SIZE; column++) {
-//            System.out.printf("%3d", column + 1);
-//        }
-//        System.out.println();
-//
-//        // Print the board
-//        for (int row = 0; row < BOARD_SIZE; row++) {
-//            System.out.printf("%-3d", row + 1);
-//            for (int column = 0; column < BOARD_SIZE; column++) {
-//                System.out.printf("%-3s", boardRepresentation[row][column]);
-//            }
-//            System.out.println();
-//        }
-//    }
     public String printBoard() {
         StringBuilder sb = new StringBuilder();
 
@@ -119,7 +102,6 @@ public class Board {
         if (isEmptySpot(row, column) && isValidPosition(row, column)) {
             // place a stone of the specified color at the specified location
             boardRepresentation[row][column] = color;
-            Game.resetPass();
         }
     }
 

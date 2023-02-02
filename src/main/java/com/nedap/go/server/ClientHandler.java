@@ -125,17 +125,11 @@ public class ClientHandler implements Runnable {
         return username;
     }
 
-    public Socket getSocket() {
-        return socket;
-    }
 
     public BufferedReader getIn() {
         return in;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
 
     public PrintWriter getOut() {
         return out;
